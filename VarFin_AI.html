@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Итоги конкурса «ВарФин 2026»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* === Базовые стили (для standalone-страницы в iframe) === */
+html { font-size: 62.5%; } /* 1rem = 10px, как на сайте fa.ru */
+body {
+  margin: 0;
+  padding: 2.4rem;
+  font-family: "Golos Text", "Golos", "Montserrat", "Arial", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #121314;
+  background: #ffffff;
+  /* CSS-переменные сайта fa.ru — для совместимости стилей */
+  --main-font: "Golos", "Arial", sans-serif;
+  --text-color: #121314;
+  --text-2-color: #9197a3;
+  --primary-color: #33b3b2;
+  --primary-light-color: #4dc6c5;
+  --primary-dark-color: #1f9493;
+  --accent-color: #093b80;
+  --accent-dark-color: #033168;
+  --element-bg: #ffffff;
+  --element-2-bg: #f3f3f3;
+  --divider-color: #d9dde4;
+  --border-color: #d9dde4;
+}
+@media (max-width: 767px) { body { padding: 1.6rem; } }
+
+.vf-results { font-family: var(--main-font, "Golos", "Arial", sans-serif); color: var(--text-color, #121314); font-size: 1.6rem; line-height: 1.6; max-width: 1360px; margin: 0 auto; }
+.vf-results * { box-sizing: border-box; }
+.vf-results .vf-block { margin-bottom: 6.4rem; }
+.vf-results .vf-block-title { font-size: 3.2rem; line-height: 4rem; font-weight: 600; margin: 0 0 2.4rem; padding-bottom: 1.6rem; border-bottom: 2px solid var(--primary-color, #33b3b2); color: var(--text-color, #121314); }
+
+/* ===== ТОП-победители ===== */
+.vf-top-list { display: flex; flex-direction: column; gap: 1.2rem; }
+.vf-top-item { display: flex; align-items: center; gap: 1.6rem; padding: 1.8rem 2rem; border-radius: 1.2rem; background: var(--element-2-bg, #f3f3f3); border-left: 4px solid var(--primary-color, #33b3b2); flex-wrap: wrap; }
+.vf-top-item._gold { border-left-color: #f1c40f; background: linear-gradient(90deg, rgba(255,248,225,1), rgba(255,236,179,0.4)); }
+.vf-top-item._silver { border-left-color: #95a5a6; background: linear-gradient(90deg, rgba(236,240,241,1), rgba(189,195,199,0.4)); }
+.vf-top-item._bronze { border-left-color: #cd7f32; background: linear-gradient(90deg, rgba(255,238,224,1), rgba(255,213,180,0.4)); }
+.vf-top-rank { font-size: 2.8rem; font-weight: 700; min-width: 4rem; text-align: center; color: var(--accent-color, #093b80); }
+.vf-top-info { flex: 1 1 30rem; min-width: 0; }
+.vf-top-project { font-size: 1.6rem; font-weight: 600; line-height: 2.2rem; margin: 0.4rem 0; color: var(--text-color, #121314); }
+.vf-top-author { font-size: 1.4rem; line-height: 2rem; color: var(--text-2-color, #9197a3); }
+.vf-top-org { font-size: 1.3rem; line-height: 1.8rem; color: var(--text-2-color, #9197a3); font-style: italic; margin-top: 0.4rem; }
+.vf-top-prize { font-size: 1.3rem; font-weight: 600; padding: 0.8rem 1.4rem; border-radius: 2rem; background: var(--primary-color, #33b3b2); color: #fff; white-space: nowrap; }
+
+.vf-badge { display: inline-block; font-size: 1.2rem; font-weight: 500; padding: 0.3rem 0.8rem; border-radius: 0.4rem; color: #fff; margin-bottom: 0.4rem; }
+.vf-badge._natural { background: #27ae60; }
+.vf-badge._social { background: #e67e22; }
+.vf-badge._exact { background: #3498db; }
+.vf-badge._philology { background: #9b59b6; }
+
+/* ===== Карточки статистики ===== */
+.vf-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.6rem; }
+.vf-stat-card { padding: 2.4rem 1.6rem; border-radius: 1.6rem; text-align: center; color: #fff; background: linear-gradient(135deg, var(--primary-color, #33b3b2) 0%, var(--accent-color, #093b80) 100%); }
+.vf-stat-card._blue { background: linear-gradient(135deg, #3498db, #2980b9); }
+.vf-stat-card._purple { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+.vf-stat-card._green { background: linear-gradient(135deg, #27ae60, #1e8449); }
+.vf-stat-card._warm { background: linear-gradient(135deg, #e67e22, #d35400); }
+.vf-stat-num { font-size: 3.6rem; line-height: 1; font-weight: 700; }
+.vf-stat-label { font-size: 1.3rem; line-height: 1.8rem; opacity: 0.95; margin-top: 0.6rem; }
+
+/* ===== CSS-графики ===== */
+
+/* Горизонтальные бары */
+.vf-bar-chart { background: var(--element-2-bg, #f3f3f3); border-radius: 1.2rem; padding: 2rem; }
+.vf-bar-chart-title { font-size: 1.5rem; font-weight: 600; color: var(--accent-color, #093b80); margin-bottom: 1.6rem; text-align: center; }
+.vf-bar-row { display: grid; grid-template-columns: 12rem 1fr 5rem; align-items: center; gap: 1.2rem; margin-bottom: 1rem; font-size: 1.4rem; }
+.vf-bar-label { color: var(--text-color, #121314); font-weight: 500; }
+.vf-bar-track { background: rgba(0,0,0,0.06); height: 1.8rem; border-radius: 0.9rem; overflow: hidden; }
+.vf-bar-fill { height: 100%; border-radius: 0.9rem; background: var(--primary-color, #33b3b2); transition: width 0.5s; }
+.vf-bar-fill._teal { background: var(--primary-color, #33b3b2); }
+.vf-bar-fill._navy { background: var(--accent-color, #093b80); }
+.vf-bar-fill._green { background: #27ae60; }
+.vf-bar-fill._red { background: #e74c3c; }
+.vf-bar-fill._orange { background: #e67e22; }
+.vf-bar-value { font-weight: 700; color: var(--accent-color, #093b80); text-align: right; }
+
+/* Donut диаграмма (conic-gradient) */
+.vf-donut-wrap { background: var(--element-2-bg, #f3f3f3); border-radius: 1.2rem; padding: 2rem; text-align: center; }
+.vf-donut { width: 20rem; height: 20rem; border-radius: 50%; margin: 1rem auto; position: relative; }
+.vf-donut::after { content: ""; position: absolute; inset: 25%; background: var(--element-2-bg, #f3f3f3); border-radius: 50%; }
+.vf-donut-legend { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.6rem; font-size: 1.3rem; }
+.vf-legend-item { display: flex; align-items: center; gap: 0.6rem; }
+.vf-legend-dot { width: 1.4rem; height: 1.4rem; border-radius: 50%; }
+
+/* Сетка графиков */
+.vf-chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem; }
+@media (max-width: 1023px) { .vf-chart-grid { grid-template-columns: 1fr; } }
+
+/* Фазы */
+.vf-phase { background: var(--element-2-bg, #f3f3f3); border-radius: 1.2rem; padding: 2rem; margin-bottom: 2rem; }
+.vf-phase-title { font-size: 1.6rem; font-weight: 600; color: var(--accent-color, #093b80); margin-bottom: 1.2rem; }
+.vf-phase-stats { display: flex; gap: 2.4rem; flex-wrap: wrap; }
+.vf-phase-stat { text-align: center; flex: 1; min-width: 12rem; }
+.vf-phase-stat-num { font-size: 2.8rem; font-weight: 700; color: var(--primary-color, #33b3b2); }
+.vf-phase-stat-label { font-size: 1.2rem; color: var(--text-2-color, #9197a3); }
+
+/* Комментарии */
+.vf-comment-box { background: var(--element-2-bg, #f3f3f3); border-left: 4px solid var(--primary-color, #33b3b2); border-radius: 1.2rem; padding: 2rem; margin: 2rem 0; }
+.vf-comment-box h4 { font-size: 1.6rem; font-weight: 600; color: var(--accent-color, #093b80); margin: 0 0 1.2rem; }
+.vf-comment-list { list-style: none; padding: 0; margin: 0; }
+.vf-comment-list li { padding: 0.8rem 0; border-bottom: 1px solid var(--divider-color, #d9dde4); font-size: 1.5rem; line-height: 2.2rem; }
+.vf-comment-list li:last-child { border-bottom: none; }
+
+/* Итоговый комментарий — тёмный блок */
+.vf-summary { background: linear-gradient(135deg, var(--accent-color, #093b80) 0%, var(--accent-dark-color, #033168) 100%); color: #fff; padding: 3.2rem; border-radius: 1.6rem; margin: 2.4rem 0; }
+.vf-summary h3 { font-size: 2.4rem; line-height: 3.2rem; font-weight: 600; color: var(--primary-light-color, #4dc6c5); margin: 0 0 2rem; padding-bottom: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.2); }
+.vf-summary h4 { font-size: 1.8rem; font-weight: 600; color: var(--primary-light-color, #4dc6c5); margin: 0 0 1.2rem; }
+.vf-summary p { font-size: 1.5rem; line-height: 2.4rem; margin: 0 0 1.2rem; }
+.vf-summary .vf-summary-sub { margin-bottom: 2.4rem; }
+.vf-summary b { color: var(--primary-light-color, #4dc6c5); font-weight: 600; }
+.vf-summary ul { padding-left: 2rem; margin: 1.2rem 0 0; }
+.vf-summary li { font-size: 1.5rem; line-height: 2.4rem; margin-bottom: 0.8rem; }
+.vf-summary-footer { font-size: 1.5rem; line-height: 2.4rem; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.3); margin-top: 1.6rem; }
+
+/* Блок ИИ */
+.vf-ai-stage { background: var(--element-2-bg, #f3f3f3); border-radius: 1.2rem; padding: 2rem; margin: 1.6rem 0; border-left: 4px solid var(--primary-color, #33b3b2); }
+.vf-ai-stage h4 { font-size: 1.6rem; font-weight: 600; color: var(--accent-color, #093b80); margin: 0 0 1.2rem; }
+.vf-ai-table { width: 100%; border-collapse: collapse; font-size: 1.3rem; background: #fff; border-radius: 0.8rem; overflow: hidden; }
+.vf-ai-table td { padding: 0.8rem 1.2rem; border-bottom: 1px solid var(--divider-color, #d9dde4); }
+.vf-ai-table tr:last-child td { border-bottom: none; }
+.vf-ai-table td._score { text-align: center; background: #fff3cd; font-weight: 600; }
+.vf-ai-table td._desc { color: var(--text-2-color, #9197a3); }
+.vf-ai-cards { display: flex; gap: 1.6rem; flex-wrap: wrap; margin-top: 1.2rem; }
+.vf-ai-card { background: #fff; border: 1px solid var(--border-color, #d9dde4); border-radius: 0.8rem; padding: 1.2rem; font-size: 1.3rem; line-height: 1.9rem; flex: 1; min-width: 18rem; }
+.vf-ai-badge { display: inline-block; background: #fff3cd; padding: 0.3rem 0.8rem; border-radius: 0.4rem; font-weight: 600; }
+
+.vf-note { font-size: 1.3rem; color: var(--text-2-color, #9197a3); font-style: italic; margin-top: 1.2rem; }
+.vf-text { font-size: 1.5rem; line-height: 2.2rem; }
+</style>
+
+<div class="vf-results">
+
+  <!-- ===== ТОП-5 ПОБЕДИТЕЛЕЙ ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">🏆 Топ-5 победителей</h2>
+    <div class="vf-top-list">
+
+      <article class="vf-top-item _gold">
+        <div class="vf-top-rank">1</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _exact">📊 Точные науки</span>
+          <div class="vf-top-project">КИБЕРЩИТ: Финансовый суверенитет</div>
+          <div class="vf-top-author">Натаров В.Д., Прудникова М., Долженкова Е. (3 чел.)</div>
+          <div class="vf-top-org">Курский филиал Финуниверситета</div>
+        </div>
+        <div class="vf-top-prize">Шлем VR + лицензии Varwin</div>
+      </article>
+
+      <article class="vf-top-item _silver">
+        <div class="vf-top-rank">2</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _exact">📊 Точные науки</span>
+          <div class="vf-top-project">ФИНБАНК: VR-симулятор</div>
+          <div class="vf-top-author">Холодова П.А., Батура О.Н. (2 чел.)</div>
+          <div class="vf-top-org">Курский филиал Финуниверситета</div>
+        </div>
+        <div class="vf-top-prize">Лицензия Varwin Edu (год)</div>
+      </article>
+
+      <article class="vf-top-item _bronze">
+        <div class="vf-top-rank">3</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _social">🏛️ Соц-гум</span>
+          <div class="vf-top-project">Реальность 1941: панорама памяти</div>
+          <div class="vf-top-author">Ганюшкин М.М., Тутыхин С., Шиганцов Н. и др. (7 чел.)</div>
+          <div class="vf-top-org">Бузулукский филиал Финуниверситета</div>
+        </div>
+        <div class="vf-top-prize">Лицензия Varwin Edu (год)</div>
+      </article>
+
+      <article class="vf-top-item">
+        <div class="vf-top-rank">4</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _exact">📊 Точные науки</span>
+          <div class="vf-top-project">Живая геометрия: математика в орнаментах народов России</div>
+          <div class="vf-top-author">Тоноян Р.А., Расторгуев М., Краткая Д., Адарченко А. (4 чел.)</div>
+          <div class="vf-top-org">Новороссийский филиал Финуниверситета</div>
+        </div>
+        <div class="vf-top-prize">Powerbank + лицензия Varwin</div>
+      </article>
+
+      <article class="vf-top-item">
+        <div class="vf-top-rank">5</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _social">🏛️ Соц-гум</span>
+          <div class="vf-top-project">VR-тренажёр для начинающих инвесторов</div>
+          <div class="vf-top-author">Прокошина П.С., Калимханова Ж. (2 чел.)</div>
+          <div class="vf-top-org">Московский финансовый колледж</div>
+        </div>
+        <div class="vf-top-prize">Powerbank + лицензия Varwin</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== ПОБЕДИТЕЛИ В НОМИНАЦИЯХ ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">🎖️ Победители в номинациях</h2>
+    <div class="vf-top-list">
+
+      <article class="vf-top-item">
+        <div class="vf-top-rank">1</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _social">🏛️ Соц-гум</span>
+          <div class="vf-top-project">«Исследователь-аналитик будущего»</div>
+          <div class="vf-top-author">Заворотнов Д.Е., Добрынина А.С., Широков Н.В. (3 чел.)</div>
+          <div class="vf-top-org">Лицей Финуниверситета</div>
+        </div>
+        <div class="vf-top-prize">Сертификат Ozon</div>
+      </article>
+
+      <article class="vf-top-item">
+        <div class="vf-top-rank">2</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _natural">🧪 Естественные</span>
+          <div class="vf-top-project">«Инновационный проект»</div>
+          <div class="vf-top-author">Гильмутдинов Я.Г. (1 чел.)</div>
+          <div class="vf-top-org">Лицей Финуниверситета</div>
+        </div>
+        <div class="vf-top-prize">Сертификат Ozon</div>
+      </article>
+
+      <article class="vf-top-item">
+        <div class="vf-top-rank">3</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _exact">📊 Точные науки</span>
+          <div class="vf-top-project">«Цифровой лидер»</div>
+          <div class="vf-top-author">Воронова Е.Г., Жданов Г., Покусаева А., Джамбаева А. (4 чел.)</div>
+          <div class="vf-top-org">Колледж информатики и программирования Финуниверситета</div>
+        </div>
+        <div class="vf-top-prize">Сертификат Ozon</div>
+      </article>
+
+      <article class="vf-top-item">
+        <div class="vf-top-rank">4</div>
+        <div class="vf-top-info">
+          <span class="vf-badge _philology">📚 Филология</span>
+          <div class="vf-top-project">«Исследовательский проект»</div>
+          <div class="vf-top-author">Контеева М.С. (1 чел.)</div>
+          <div class="vf-top-org">Лицей Финуниверситета</div>
+        </div>
+        <div class="vf-top-prize">Сертификат Ozon</div>
+      </article>
+
+    </div>
+    <p class="vf-note">* Дополнительные номинации: «Финансовый консультант», «Финансовый аналитик», «Финансовый инженер».</p>
+  </section>
+
+  <!-- ===== ОБЩАЯ СТАТИСТИКА ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">📊 Общая статистика конкурса</h2>
+    <div class="vf-stats-grid">
+      <div class="vf-stat-card"><div class="vf-stat-num">149</div><div class="vf-stat-label">Всего работ</div></div>
+      <div class="vf-stat-card _blue"><div class="vf-stat-num">130</div><div class="vf-stat-label">С видео</div></div>
+      <div class="vf-stat-card _purple"><div class="vf-stat-num">137</div><div class="vf-stat-label">С тезисами</div></div>
+      <div class="vf-stat-card _green"><div class="vf-stat-num">25.5</div><div class="vf-stat-label">Средний балл</div></div>
+      <div class="vf-stat-card _warm"><div class="vf-stat-num">28</div><div class="vf-stat-label">Максимум</div></div>
+    </div>
+  </section>
+
+  <!-- ===== ТИП РАБОТЫ И ФОРМАТ ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">📋 Тип работы и формат участников</h2>
+    <div class="vf-chart-grid">
+
+      <!-- Donut: Тип работы -->
+      <div class="vf-donut-wrap">
+        <div class="vf-bar-chart-title">Тип работы</div>
+        <div class="vf-donut" style="background: conic-gradient(#33b3b2 0% 43.6%, #093b80 43.6% 100%);"></div>
+        <div class="vf-donut-legend">
+          <div class="vf-legend-item"><span class="vf-legend-dot" style="background:#33b3b2"></span>Исследовательская — 65</div>
+          <div class="vf-legend-item"><span class="vf-legend-dot" style="background:#093b80"></span>Проектная — 84</div>
+        </div>
+      </div>
+
+      <!-- Donut: Формат работы -->
+      <div class="vf-donut-wrap">
+        <div class="vf-bar-chart-title">Формат работы</div>
+        <div class="vf-donut" style="background: conic-gradient(#27ae60 0% 45%, #e67e22 45% 100%);"></div>
+        <div class="vf-donut-legend">
+          <div class="vf-legend-item"><span class="vf-legend-dot" style="background:#27ae60"></span>Индивидуальная — 67</div>
+          <div class="vf-legend-item"><span class="vf-legend-dot" style="background:#e67e22"></span>Групповая — 82</div>
+        </div>
+      </div>
+
+      <!-- Бары: Тип организации -->
+      <div class="vf-bar-chart">
+        <div class="vf-bar-chart-title">Тип организации (количество работ)</div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Школа</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 100%;"></div></div>
+          <div class="vf-bar-value">45</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Гимназия</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 93%;"></div></div>
+          <div class="vf-bar-value">42</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Лицей</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 84%;"></div></div>
+          <div class="vf-bar-value">38</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Колледж</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 53%;"></div></div>
+          <div class="vf-bar-value">24</div>
+        </div>
+      </div>
+
+      <!-- Бары: Средний балл по типу организации -->
+      <div class="vf-bar-chart">
+        <div class="vf-bar-chart-title">Средний балл по типу организации</div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Лицей</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 90.3%;"></div></div>
+          <div class="vf-bar-value">27.1</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Гимназия</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 86%;"></div></div>
+          <div class="vf-bar-value">25.8</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Школа</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 80.7%;"></div></div>
+          <div class="vf-bar-value">24.2</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Колледж</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 78%;"></div></div>
+          <div class="vf-bar-value">23.4</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ТЕЗИСЫ И ЗАЯВКИ ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">📝 Тезисы и заявки</h2>
+
+    <div class="vf-phase">
+      <div class="vf-phase-title">📋 Оценивание: язык, цитирование, композиция, внешний вид (max 2 балла)</div>
+      <div class="vf-phase-stats">
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">1.75</div><div class="vf-phase-stat-label">Средний балл</div></div>
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">2.0</div><div class="vf-phase-stat-label">Максимум</div></div>
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">87.5%</div><div class="vf-phase-stat-label">Выполнение</div></div>
+      </div>
+    </div>
+
+    <div class="vf-bar-chart">
+      <div class="vf-bar-chart-title">Тезисы: средний балл по критериям</div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Язык</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _green" style="width: 99%;"></div></div>
+        <div class="vf-bar-value">1.98</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Композиция</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _green" style="width: 92.5%;"></div></div>
+        <div class="vf-bar-value">1.85</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Цитирование</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _red" style="width: 80%;"></div></div>
+        <div class="vf-bar-value">1.60</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Внешний вид</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _red" style="width: 79%;"></div></div>
+        <div class="vf-bar-value">1.58</div>
+      </div>
+    </div>
+
+    <div class="vf-comment-box">
+      <h4>💡 Комментарии экспертов</h4>
+      <ul class="vf-comment-list">
+        <li>✅ <b>Язык (1.98/2)</b> — участники демонстрируют хорошее владение научным стилем, грамотность на высоком уровне.</li>
+        <li>⚠️ <b>Цитирование (1.60/2)</b> — частая проблема: отсутствуют ссылки на источники или нарушено оформление библиографии.</li>
+        <li>✅ <b>Композиция (1.85/2)</b> — работы имеют чёткую структуру и логичное изложение.</li>
+        <li>⚠️ <b>Внешний вид (1.58/2)</b> — типичные недочёты: неправильные шрифты, нарушенные интервалы, отсутствие нумерации страниц.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== МЕТОДОЛОГИЯ ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">🔬 Методология исследования</h2>
+
+    <div class="vf-phase">
+      <div class="vf-phase-title">📋 Оценивание: тема, цель, задачи, методы, материал, результаты (max 2 балла)</div>
+      <div class="vf-phase-stats">
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">1.91</div><div class="vf-phase-stat-label">Средний балл</div></div>
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">2.0</div><div class="vf-phase-stat-label">Максимум</div></div>
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">95.5%</div><div class="vf-phase-stat-label">Выполнение</div></div>
+      </div>
+    </div>
+
+    <div class="vf-bar-chart">
+      <div class="vf-bar-chart-title">Методология: средний балл по критериям</div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Тема</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 100%;"></div></div>
+        <div class="vf-bar-value">2.00</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Материал</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 99.5%;"></div></div>
+        <div class="vf-bar-value">1.99</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Цель</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 97.5%;"></div></div>
+        <div class="vf-bar-value">1.95</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Результаты</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 94.5%;"></div></div>
+        <div class="vf-bar-value">1.89</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Методы</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 92%;"></div></div>
+        <div class="vf-bar-value">1.84</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Задачи</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 90%;"></div></div>
+        <div class="vf-bar-value">1.80</div>
+      </div>
+    </div>
+
+    <div class="vf-comment-box">
+      <h4>💡 Комментарии экспертов</h4>
+      <ul class="vf-comment-list">
+        <li>🌟 <b>Тема (2.00/2)</b> — темы актуальные, хорошо привязаны к финансовой грамотности.</li>
+        <li>✅ <b>Цель (1.95/2)</b> — цели сформулированы чётко, соответствуют требованиям ФГОС.</li>
+        <li>⚠️ <b>Задачи (1.80/2)</b> — не всегда чётко вытекают из цели, формулировки порой абстрактные.</li>
+        <li>⚠️ <b>Методы (1.84/2)</b> — описаны, но не всегда обоснованы выбором, нужно больше конкретики.</li>
+        <li>✅ <b>Материал (1.99/2)</b> — достаточный объём данных для анализа.</li>
+        <li>⚠️ <b>Результаты (1.89/2)</b> — выводы не всегда логично вытекают из результатов.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== ВЫСТУПЛЕНИЕ ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">🎬 Выступление и презентация</h2>
+
+    <div class="vf-phase">
+      <div class="vf-phase-title">📋 Оценивание: речь, логика, длительность, презентация (max 2 балла)</div>
+      <div class="vf-phase-stats">
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">1.65</div><div class="vf-phase-stat-label">Средний балл</div></div>
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">2.0</div><div class="vf-phase-stat-label">Максимум</div></div>
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">82.5%</div><div class="vf-phase-stat-label">Выполнение</div></div>
+      </div>
+    </div>
+
+    <div class="vf-chart-grid">
+
+      <div class="vf-bar-chart">
+        <div class="vf-bar-chart-title">Выступление: средний балл</div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Речь</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 94.5%;"></div></div>
+          <div class="vf-bar-value">1.89</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Презентация</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 85%;"></div></div>
+          <div class="vf-bar-value">1.70</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Логика</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 82.5%;"></div></div>
+          <div class="vf-bar-value">1.65</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Длительность</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _orange" style="width: 70%;"></div></div>
+          <div class="vf-bar-value">1.40</div>
+        </div>
+      </div>
+
+      <div class="vf-bar-chart">
+        <div class="vf-bar-chart-title">Длительность видео (количество работ)</div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">3–5 мин</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 100%;"></div></div>
+          <div class="vf-bar-value">45</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">5–7 мин</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 84.4%;"></div></div>
+          <div class="vf-bar-value">38</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">&gt; 7 мин</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 77.7%;"></div></div>
+          <div class="vf-bar-value">35</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">&lt; 3 мин</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 26.6%;"></div></div>
+          <div class="vf-bar-value">12</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="vf-bar-chart">
+      <div class="vf-bar-chart-title">Количество слайдов в презентациях</div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">5–10 слайдов</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 100%;"></div></div>
+        <div class="vf-bar-value">52</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">10–15 слайдов</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 73%;"></div></div>
+        <div class="vf-bar-value">38</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">&gt; 15 слайдов</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 42.3%;"></div></div>
+        <div class="vf-bar-value">22</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">&lt; 5 слайдов</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 34.6%;"></div></div>
+        <div class="vf-bar-value">18</div>
+      </div>
+    </div>
+
+    <div class="vf-comment-box">
+      <h4>💡 Комментарии экспертов</h4>
+      <ul class="vf-comment-list">
+        <li>⚠️ <b>Длительность (1.40/2)</b> — главная проблема: многие не укладываются в рекомендованные 3–5 минут.</li>
+        <li>⚠️ <b>Речь (1.60/2)</b> — заметно волнение, темп речи неровный, дикция требует тренировки.</li>
+        <li>✅ <b>Логика (1.70/2)</b> — структура выступления хорошая, но переходы между частями бывают резкими.</li>
+        <li>✅ <b>Презентация (1.70/2)</b> — слайды информативные, но часто перегружены текстом.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== ИТОГОВЫЙ КОММЕНТАРИЙ ===== -->
+  <section class="vf-block">
+    <div class="vf-summary">
+      <h3>🏆 Итоги Всероссийского конкурса «ВарФин 2026»</h3>
+
+      <p>Завершился очередной этап конкурса исследовательских и проектных работ в виртуальной реальности. Анализ результатов, проведённый экспертной комиссией совместно с системой искусственного интеллекта, позволил выделить ключевые закономерности и области для развития будущих участников.</p>
+
+      <div class="vf-summary-sub">
+        <h4>🔑 Ключевые выводы экспертной комиссии</h4>
+        <p><b>Приоритет качества тезисов.</b> Статистика подтверждает, что фундаментальным фактором успеха является проработка текстовой части проекта. В отличие от видеозащиты или презентации, тезисы позволяют экспертам детально и неоднократно изучить логику исследования. Именно глубокая проработка текста зачастую отделяет победителей от призёров.</p>
+        <p><b>Дисбаланс между содержанием и формой.</b> Одной из частых проблем стала «слабая упаковка» при сильном содержании. Многие участники, демонстрируя высокие исследовательские навыки, сталкиваются с трудностями на этапе презентации: несоблюдение регламента (превышение лимита 3–5 минут), избыток текста на слайдах и недостаточно чёткая дикция.</p>
+      </div>
+
+      <div class="vf-summary-sub">
+        <h4>📊 Конкурс в цифрах</h4>
+        <p>Уровень подготовки в этом году оказался стабильно высоким: средний балл <b>25.5 из 28 возможных</b>. Структура работ: <b>65 исследовательских</b> и <b>84 проектных</b> решения. Личный вклад: <b>67 индивидуальных участников</b> подготовили документацию, по качеству не уступающую командным работам.</p>
+      </div>
+
+      <div class="vf-summary-sub">
+        <h4>💡 Рекомендации для будущих участников</h4>
+        <p>Для повышения конкурентоспособности проектов в следующих сезонах эксперты советуют:</p>
+        <ul>
+          <li><b>Адаптировать контент под формат.</b> Не пытайтесь перенести текст тезисов на слайды. Используйте инфографику и визуализируйте ключевые показатели.</li>
+          <li><b>Акцентировать внимание на VR-составляющей.</b> В видеозащите важно показывать не только слайды, но и сам процесс работы в виртуальном пространстве.</li>
+          <li><b>Работать над подачей.</b> Избегайте чтения с листа. Чёткая речь и акцент на личной роли в проекте значительно повышают итоговую оценку.</li>
+          <li><b>Соблюдать технические требования.</b> Обращайте внимание на оформление цитат и библиографии — основные источники потери баллов в текстовой части.</li>
+        </ul>
+      </div>
+
+      <p class="vf-summary-footer">Желаем успехов в реализации ваших VR-проектов и ждём на будущих этапах конкурса!</p>
+    </div>
+  </section>
+
+  <!-- ===== ПРОВЕРКА ИИ ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">🤖 Проверка ИИ: результаты и выводы</h2>
+
+    <div class="vf-phase">
+      <div class="vf-phase-title">📋 Описание проверки ИИ</div>
+      <p class="vf-text">Автоматизированная система обработала <b>149 участников</b> за несколько минут. Проверка включала следующие этапы:</p>
+    </div>
+
+    <div class="vf-ai-stage">
+      <h4>🔍 Этап 1. Чтение заявок</h4>
+      <p class="vf-text" style="margin-bottom:1.2rem;">Из загруженных заявок (PPTX/DOCX) прочитаны тексты и проверено наличие ключевых разделов:</p>
+      <table class="vf-ai-table">
+        <tr><td>Аннотация</td><td class="_score">+2</td><td class="_desc">Краткое описание</td></tr>
+        <tr><td>Актуальность</td><td class="_score">+2</td><td class="_desc">Почему нужен проект</td></tr>
+        <tr><td>Цель</td><td class="_score">+1</td><td class="_desc">Что достичь</td></tr>
+        <tr><td>Задачи</td><td class="_score">+1</td><td class="_desc">Конкретные шаги</td></tr>
+        <tr><td>Методы</td><td class="_score">+3</td><td class="_desc">Как решаются</td></tr>
+        <tr><td>Результаты</td><td class="_score">+3</td><td class="_desc">Что получится</td></tr>
+        <tr><td>Выводы</td><td class="_score">+2</td><td class="_desc">Итоги проекта</td></tr>
+        <tr><td>Команда / бюджет</td><td class="_score">+2</td><td class="_desc">Участники и стоимость</td></tr>
+      </table>
+      <p style="margin-top:1.2rem;font-size:1.4rem;font-weight:600;">Максимум: <span class="vf-ai-badge">+14 баллов</span></p>
+    </div>
+
+    <div class="vf-ai-stage">
+      <h4>🎬 Этап 2. Проверка видео и презентаций</h4>
+      <p class="vf-text">Оценены видео-презентации по 4-балльной шкале:</p>
+      <div class="vf-ai-cards">
+        <div class="vf-ai-card">
+          <b>Баллы за видео:</b><br>
+          0 — нет видео (19)<br>
+          2 — очень короткое (6)<br>
+          3 — среднее (28)<br>
+          4 — полноценное (96)<br>
+          <b>Средний: 3.2</b>
+        </div>
+        <div class="vf-ai-card">
+          <b>Баллы за слайды:</b><br>
+          Структура: 0–3<br>
+          Содержание: 0–7<br>
+          Выводы: 0–2<br>
+          <b>Максимум: 13 баллов</b><br>
+          <b>Средний: 7.4</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="vf-ai-stage">
+      <h4>📊 Этап 3. Объединение оценок</h4>
+      <p class="vf-text">Итоговый балл = Видео + Тезисы + Балл заявки</p>
+    </div>
+
+    <div class="vf-phase">
+      <div class="vf-phase-title">🔍 Что проверил ИИ</div>
+      <div class="vf-phase-stats">
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">149</div><div class="vf-phase-stat-label">Работ проверено</div></div>
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">15.2</div><div class="vf-phase-stat-label">Средний балл ИИ</div></div>
+        <div class="vf-phase-stat"><div class="vf-phase-stat-num">25.5</div><div class="vf-phase-stat-label">Средний экспертный</div></div>
+      </div>
+    </div>
+
+    <div class="vf-bar-chart">
+      <div class="vf-bar-chart-title">Сравнение оценок ИИ и экспертов</div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">Эксперты</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _green" style="width: 91%;"></div></div>
+        <div class="vf-bar-value">25.5</div>
+      </div>
+      <div class="vf-bar-row">
+        <div class="vf-bar-label">ИИ</div>
+        <div class="vf-bar-track"><div class="vf-bar-fill _red" style="width: 54%;"></div></div>
+        <div class="vf-bar-value">15.2</div>
+      </div>
+    </div>
+
+    <div class="vf-comment-box">
+      <h4>📊 Как работала система ИИ</h4>
+      <ul class="vf-comment-list">
+        <li>🔎 <b>Автоматический поиск</b> — ИИ находил ключевые разделы в заявках автоматически.</li>
+        <li>📝 <b>Анализ текста</b> — оценивал качество тезисов по 13 критериям.</li>
+        <li>🎯 <b>Предиктивный scoring</b> — предсказывал итоговый балл на основе качества содержания.</li>
+        <li>🏆 <b>Топ-лист</b> — сформировал предварительный рейтинг победителей.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== РАСПРЕДЕЛЕНИЕ БАЛЛОВ ===== -->
+  <section class="vf-block">
+    <h2 class="vf-block-title">📈 Распределение итоговых баллов</h2>
+    <div class="vf-chart-grid">
+
+      <div class="vf-bar-chart">
+        <div class="vf-bar-chart-title">Распределение работ по диапазонам баллов</div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">11–15 баллов</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 100%;"></div></div>
+          <div class="vf-bar-value">73</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">16–20 баллов</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 57.5%;"></div></div>
+          <div class="vf-bar-value">42</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">0–10 баллов</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 30%;"></div></div>
+          <div class="vf-bar-value">22</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">21–28 баллов</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 16.5%;"></div></div>
+          <div class="vf-bar-value">12</div>
+        </div>
+      </div>
+
+      <div class="vf-bar-chart">
+        <div class="vf-bar-chart-title">Средний балл по типу работ</div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Проектная</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _navy" style="width: 96.8%;"></div></div>
+          <div class="vf-bar-value">27.1</div>
+        </div>
+        <div class="vf-bar-row">
+          <div class="vf-bar-label">Исследовательская</div>
+          <div class="vf-bar-track"><div class="vf-bar-fill _teal" style="width: 86.4%;"></div></div>
+          <div class="vf-bar-value">24.2</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
