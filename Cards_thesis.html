@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВарФин 2026 — Все работы конкурса</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html { font-size: 62.5%; }
+body {
+  margin: 0;
+  padding: 2.4rem;
+  font-family: "Golos Text", "Golos", "Montserrat", "Arial", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #121314;
+  background: #ffffff;
+  --main-font: "Golos Text", "Arial", sans-serif;
+  --text-color: #121314;
+  --text-2-color: #9197a3;
+  --primary-color: #33b3b2;
+  --primary-light-color: #4dc6c5;
+  --primary-dark-color: #1f9493;
+  --accent-color: #093b80;
+  --accent-dark-color: #033168;
+  --accent-light-color: #275e9f;
+  --element-bg: #ffffff;
+  --element-2-bg: #f3f3f3;
+  --divider-color: #d9dde4;
+  --border-color: #d9dde4;
+}
+@media (max-width: 767px) { body { padding: 1.6rem; } }
+* { box-sizing: border-box; }
+
+.vfc-wrap { max-width: 136rem; margin: 0 auto; }
+
+/* Шапка */
+.vfc-header { text-align: center; margin-bottom: 3.2rem; padding: 2.4rem 0; }
+.vfc-header h1 { font-size: 3.6rem; line-height: 4.4rem; font-weight: 600; color: var(--accent-color); margin: 0 0 0.8rem; }
+.vfc-header p { font-size: 1.6rem; color: var(--text-2-color); margin: 0; }
+
+.vfc-stat { display: inline-block; background: var(--primary-color); color: #fff; padding: 0.8rem 1.8rem; border-radius: 2rem; font-weight: 600; font-size: 1.4rem; margin-top: 1.2rem; }
+
+/* Поиск */
+.vfc-search-wrap { max-width: 60rem; margin: 0 auto 2.4rem; }
+.vfc-search {
+  width: 100%;
+  padding: 1.4rem 2rem;
+  border: 2px solid var(--border-color);
+  border-radius: 2.4rem;
+  font-size: 1.5rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--element-bg);
+  color: var(--text-color);
+}
+.vfc-search:focus { border-color: var(--primary-color); }
+.vfc-search-info { text-align: center; margin-top: 1rem; font-size: 1.3rem; color: var(--text-2-color); }
+
+/* Фильтры */
+.vfc-filters { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 3.2rem; }
+.vfc-filter {
+  padding: 0.8rem 1.6rem;
+  background: var(--element-2-bg);
+  border: 2px solid transparent;
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.vfc-filter:hover { border-color: var(--primary-color); }
+.vfc-filter._active { background: var(--accent-color); color: #fff; border-color: var(--accent-color); }
+
+/* Секция направления */
+.vfc-section { margin-bottom: 4rem; scroll-margin-top: 2rem; }
+.vfc-section._hidden { display: none; }
+.vfc-section-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.6rem 2rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: #fff;
+  border-radius: 1.2rem;
+  margin-bottom: 2rem;
+}
+.vfc-section-emoji { font-size: 2.4rem; }
+.vfc-section-title { font-size: 2.2rem; line-height: 2.8rem; font-weight: 600; flex: 1; }
+.vfc-section-count { background: rgba(255,255,255,0.25); padding: 0.4rem 1.2rem; border-radius: 1.6rem; font-size: 1.3rem; font-weight: 600; }
+
+/* Сетка карточек */
+.vfc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(36rem, 1fr));
+  gap: 1.6rem;
+}
+
+.vfc-card {
+  background: var(--element-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1.2rem;
+  padding: 1.8rem;
+  border-left: 4px solid var(--primary-color);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.vfc-card._hidden { display: none; }
+.vfc-card:hover { transform: translateY(-3px); box-shadow: 0 1rem 3rem rgba(0,0,0,0.08); }
+.vfc-card._natural { border-left-color: #27ae60; }
+.vfc-card._social { border-left-color: #e67e22; }
+.vfc-card._exact { border-left-color: #3498db; }
+.vfc-card._philology { border-left-color: #9b59b6; }
+
+.vfc-card-org { font-size: 1.2rem; color: var(--text-2-color); margin-bottom: 0.6rem; line-height: 1.4; }
+.vfc-card-theme { font-size: 1.5rem; line-height: 2.1rem; font-weight: 600; color: var(--accent-color); margin-bottom: 1rem; }
+
+.vfc-card-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+.vfc-badge {
+  padding: 0.3rem 0.9rem;
+  border-radius: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: var(--element-2-bg);
+  color: var(--text-color);
+}
+.vfc-badge._natural   { background: #27ae60; color: #fff; }
+.vfc-badge._social    { background: #e67e22; color: #fff; }
+.vfc-badge._exact     { background: #3498db; color: #fff; }
+.vfc-badge._philology { background: #9b59b6; color: #fff; }
+.vfc-badge._project   { background: var(--accent-light-color); color: #fff; }
+.vfc-badge._research  { background: var(--primary-color); color: #fff; }
+
+.vfc-card-people { font-size: 1.3rem; color: var(--text-color); margin-bottom: 0.4rem; line-height: 1.5; }
+.vfc-card-people._mentor { color: var(--text-2-color); }
+
+.vfc-card-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: auto; padding-top: 1.2rem; }
+.vfc-card-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.8rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.vfc-card-links a:hover { background: #ffe0b2; border-color: #e65100; }
+.vfc-card-links a.zayavka { background: #e8f5e9; color: #2e7d32; }
+.vfc-card-links a.zayavka:hover { background: #c8e6c9; border-color: #2e7d32; }
+.vfc-card-links a.pres { background: #e3f2fd; color: #1565c0; }
+.vfc-card-links a.pres:hover { background: #bbdefb; border-color: #1565c0; }
+.vfc-card-links a.cloud { background: #f3e5f5; color: #7b1fa2; }
+.vfc-card-links a.cloud:hover { background: #e1bee7; border-color: #7b1fa2; }
+
+.vfc-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-2-color);
+  font-size: 1.6rem;
+  display: none;
+}
+.vfc-empty._show { display: block; }
+
+footer { text-align: center; margin-top: 4rem; padding: 2rem; color: var(--text-2-color); font-size: 1.3rem; border-top: 1px solid var(--divider-color); }
+</style>
+</head>
+<body>
+<div class="vfc-wrap">
+
+  <header class="vfc-header">
+    <h1>🏆 ВарФин 2026 — Все работы</h1>
+    <p>Всероссийский конкурс исследовательских и проектных работ в виртуальной реальности</p>
+    <div class="vfc-stat">149 работ в 4 направлениях</div>
+  </header>
+
+  <div class="vfc-search-wrap">
+    <input type="text" id="vfcSearch" class="vfc-search" placeholder="🔍 Поиск по темам, участникам, организациям..." />
+    <div class="vfc-search-info" id="vfcInfo"></div>
+  </div>
+
+  <div class="vfc-filters">
+<button class="vfc-filter _active" data-filter="all">Все направления</button>
+<button class="vfc-filter" data-filter="natural">🔬 Естественные науки</button>
+<button class="vfc-filter" data-filter="social">🏛️ Социально-гуманитарные науки</button>
+<button class="vfc-filter" data-filter="exact">📊 Точные науки</button>
+<button class="vfc-filter" data-filter="philology">📚 Филологические науки</button>
+
+  </div>
+
+  <div class="vfc-empty" id="vfcEmpty">По вашему запросу работ не найдено</div>
+
+<section class="vfc-section" id="natural">
+  <header class="vfc-section-header">
+    <span class="vfc-section-emoji">🔬</span>
+    <h2 class="vfc-section-title">Естественные науки</h2>
+    <span class="vfc-section-count">13 работ</span>
+  </header>
+  <div class="vfc-grid">
+<article class="vfc-card _natural" data-search="благовещенский филиал финууниверситета разработка интерактивного vr-приложения для изучения векторов 👥 коншу анна алексеевна 👨‍🏫 шпакова елена ивановна">
+  <div class="vfc-card-org">Благовещенский филиал Финууниверситета</div>
+  <div class="vfc-card-theme">РАЗРАБОТКА ИНТЕРАКТИВНОГО VR-ПРИЛОЖЕНИЯ ДЛЯ ИЗУЧЕНИЯ ВЕКТОРОВ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее профессиональное образование</span></div>
+  <div class="vfc-card-people">👥 Коншу Анна Алексеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Шпакова Елена Ивановна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/ba9/3g8j6z9sjrecwge67gdaana92sq0bpjw/Estestvennye-nauki_RAZRABOTKA-INTERAKTIVNOGO-VR_PRILOZHENIYA-DLYA-IZUCHENIYA-VEKTOROV.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="канашский филиал финуниверситета vr география: путешествие по дому знаний 👥 алексеева анастасия дмитриевна; чернова татьяна сергеевна 👨‍🏫 ерамасова елена сергеевна">
+  <div class="vfc-card-org">Канашский филиал Финуниверситета</div>
+  <div class="vfc-card-theme">VR география: путешествие по дому знаний</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее специальное образование</span></div>
+  <div class="vfc-card-people">👥 Алексеева Анастасия Дмитриевна; Чернова Татьяна Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ерамасова Елена Сергеевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/549/sfg9hxqkqz4w63iaxm6zs6tpg8mr97rt/Estestvennye-nauki_VR-geografiya.-Puteshestvie-po-domu-znaniy-_1_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="колледж информатики и программирования федерального государственного образовател... силометр vr 👥 кулакова дарья николаевна; борисова юлия дмитриевна, таран фёдор борисович, каменская анна дмитриевна, егерева юлия николаевна, лепихова алиса денисовна, прусакова марина владимировна, комарова анна николаевна 👨‍🏫 нинкин кирилл юрьевич">
+  <div class="vfc-card-org">Колледж информатики и программирования федерального государственного образовател...</div>
+  <div class="vfc-card-theme">Силометр VR</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее профессиональное образование</span></div>
+  <div class="vfc-card-people">👥 Кулакова Дарья Николаевна; Борисова Юлия Дмитриевна, Таран Фёдор Борисович, Каменская Анна Дмитриевна, Егерева Юлия Николаевна, Лепихова Алиса Денисовна, Прусакова Марина Владимировна, Комарова Анна Николаевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Нинкин Кирилл Юрьевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/6be/tf3fyzcsxtgd5r3827m21stmytjo7wbm/Estestvennye-nauki_Silometr-VR.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="лицей финуниверситета создание fpv дрона 👥 новиков ефим нектарьевич 👨‍🏫 правдина людмила вениаминовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">создание FPV дрона</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">средний общий</span></div>
+  <div class="vfc-card-people">👥 Новиков Ефим Нектарьевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Правдина Людмила Вениаминовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/d00/axgh3dn3h74vq8gyrdd8atcgqoj8t4hq/VYBOR-KOMPONENTOV-I-SOZDANIE-FPV-DRONA-_1_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="лицей финуниверситета отправлено ранее. 👥 радикевич антон вадимович; радикевич антон вадимович 👨‍🏫 ермолаев фёдор сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Отправлено ранее.</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Радикевич Антон Вадимович; Радикевич Антон Вадимович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ермолаев Фёдор Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/c7d/a7pb6dacoh3r1q9mjr3hd9s3d6sw0p3g/KLYUCHEVYE-TEZISY-RABOTY-10.0-napravlenie_O-PROBLEME-ISTOSHCHENIYA-MIROVYKH-ZAPASOV-NEFTI.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="лицей финуниверситета решение проблемы истощения мировых запасов углеводородов как условие преодоления глобального нефтяного кризиса на пороге завершения эры энергетического господства нефти 👥 радикевич антон вадимович; радикевич антон вадимович 👨‍🏫 ермолаев фёдор сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">РЕШЕНИЕ ПРОБЛЕМЫ ИСТОЩЕНИЯ МИРОВЫХ ЗАПАСОВ УГЛЕВОДОРОДОВ КАК УСЛОВИЕ ПРЕОДОЛЕНИЯ ГЛОБАЛЬНОГО НЕФТЯНОГО КРИЗИСА НА ПОРОГЕ ЗАВЕРШЕНИЯ ЭРЫ ЭНЕРГЕТИЧЕСКОГО ГОСПОДСТВА НЕФТИ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Радикевич Антон Вадимович; Радикевич Антон Вадимович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ермолаев Фёдор Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/ea4/6eygx32npa91s6riwebfbu0jmlnwa1l4/KLYUCHEVYE-TEZISY-RABOTY-10.0.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="лицей финуниверситета раздельный сбор отходов: “дай мусору вторую жизнь” 👥 сергеева дарья андреевна 👨‍🏫 никитенко с.с.">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">РАЗДЕЛЬНЫЙ СБОР ОТХОДОВ: “ДАЙ МУСОРУ ВТОРУЮ ЖИЗНЬ”</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Сергеева Дарья Андреевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Никитенко С.С.</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/69f/j51hxgkqqvfs59zka5zt24wh9dlu98ny/Estestvennye-nauki_Razdelnyy-sbor-otkhodov-Day-musoru-vrotuyu-zhizn.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="лицей финуниверситета создание игры на базе игрового движка godot для подготовки к егэ и огэ по физике.​ 👥 гильмутдинов ярослав германович 👨‍🏫 алиев самир алиевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание игры на базе игрового движка Godot для подготовки к ЕГЭ и ОГЭ по физике.​</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Гильмутдинов Ярослав Германович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Алиев Самир Алиевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/638/jg2bit7fykjs1gdzqkanbrjjhhhd5rgn/GilmutdinovYAroslavTezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="лицей финуниверситета проблема роста населения и нехватки ресурсов 👥 седова арина витальевна 👨‍🏫 ермолаев федор сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Проблема роста населения и нехватки ресурсов</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее (10 "В" класс)</span></div>
+  <div class="vfc-card-people">👥 Седова Арина Витальевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ермолаев Федор Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/11d/sdsv6yr5t6ez4v2pn4v3zg7gxd9gojd0/Rost_naseleniya_i_nekhvatka_resursov1.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="лицей финуниверситета создание задачника для подготовки к егэ по физике по теме &quot;термодинамика&quot; 👥 дмитрий чирков сергеевич; лесин лев максимович 👨‍🏫 правдина людмила вениаминовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание задачника для подготовки к ЕГЭ по физике по теме "Термодинамика"</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Дмитрий Чирков Сергеевич; Лесин Лев Максимович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Правдина Людмила Вениаминовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/95b/cnuf2q8q9nlrxiq52c3fx4vkgvcxbc8h/Tezisy_proekt_termodinamika-_1_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="лицей финуниверситета исследование влияния силы архимеда на плавучесть тела человека в воде 👥 тимакин егор андреевич; гусаров тимофей андреевич 👨‍🏫 правдина людмила вениаминовна">
+  <div class="vfc-card-org">лицей финуниверситета</div>
+  <div class="vfc-card-theme">Исследование влияния силы Архимеда на плавучесть тела человека в воде</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Тимакин Егор Андреевич; Гусаров Тимофей Андреевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Правдина Людмила Вениаминовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/147/069su2cjdq2hwr7146s7si5rtfndb8wy/Estestv.nauki_Issledovanie-vliyaniya-sily-Arkhimeda-na-plavuchest-tela-cheloveka-v-vode.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="финансовый университет при правительстве российской федерации помощник ai в изучении естественнонаучных дисциплин с технологией vr 👥 нуцалханов абдулах; алискандиев шамиль, хадисов хадис 👨‍🏫 гусниева анна геннадьевна">
+  <div class="vfc-card-org">Финансовый университет при Правительстве Российской Федерации</div>
+  <div class="vfc-card-theme">ПОМОЩНИК AI В ИЗУЧЕНИИ ЕСТЕСТВЕННОНАУЧНЫХ ДИСЦИПЛИН С ТЕХНОЛОГИЕЙ VR</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">высшее</span></div>
+  <div class="vfc-card-people">👥 Нуцалханов Абдулах; Алискандиев Шамиль, Хадисов Хадис</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Гусниева Анна Геннадьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/590/xptfmygg3uokds3fwz9ma0y1nn0w5bf9/Makhachkalinskiy-filial_SHablon_tezisov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _natural" data-search="финансовый университет при правительстве российской федерации, г. ярославль от теории к практике: применение varwin для углубленного изучения модели курно в учебно-исследовательском процессе 👥 мельникова елизавета николаевна; чекалова злата ильинична, жидкова виктория александровна, захаров иван алексеевич, мамонтова владлена дмитриевна 👨‍🏫 манина оксана юрьевна">
+  <div class="vfc-card-org">Финансовый университет при Правительстве Российской Федерации, г. Ярославль</div>
+  <div class="vfc-card-theme">От теории к практике: применение VARWIN для углубленного изучения модели Курно в учебно-исследовательском процессе</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _natural">Естественные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Обучающиеся, осваивающие программы бакалавриата</span></div>
+  <div class="vfc-card-people">👥 Мельникова Елизавета Николаевна; Чекалова Злата Ильинична, Жидкова Виктория Александровна, Захаров Иван Алексеевич, Мамонтова Владлена Дмитриевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Манина Оксана Юрьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/236/u9xv4i2iwneu3mobv8xyti93me9x95iv/Estestvennye-nauki_Ot-teorii-k-praktike-primenenie-VARWIN-dlya-uglublennogo-izucheniya-modeli-Kurno-v-uchebno_issledovatelskom-protsesse.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+  </div>
+</section>
+
+<section class="vfc-section" id="social">
+  <header class="vfc-section-header">
+    <span class="vfc-section-emoji">🏛️</span>
+    <h2 class="vfc-section-title">Социально-гуманитарные науки</h2>
+    <span class="vfc-section-count">88 работ</span>
+  </header>
+  <div class="vfc-grid">
+<article class="vfc-card _social" data-search="бузулукский филиал финуниверситета реальность 1941: панорама памяти 👥 ганюшкин марк максимович; тутыхин сергей дмитриевич, шиганцов никита евгеньевич, жиглов ярослав вячеславович, танрывердиев канан орудж оглы, горбачёв даниил евгеньевич, якунин дмитрий валерьевич 👨‍🏫 назарова дарья александровна">
+  <div class="vfc-card-org">Бузулукский филиал Финуниверситета</div>
+  <div class="vfc-card-theme">Реальность 1941: панорама памяти</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее профессиональное образование</span></div>
+  <div class="vfc-card-people">👥 Ганюшкин Марк Максимович; Тутыхин Сергей Дмитриевич, Шиганцов Никита Евгеньевич, Жиглов Ярослав Вячеславович, Танрывердиев Канан Орудж оглы, Горбачёв Даниил Евгеньевич, Якунин Дмитрий Валерьевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Назарова Дарья Александровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/b67/jryhdtc00dsgffv748ocep4rdmv9bxp0/Sotsialno_gumanitarnoe_Realnost-1941-panorama-pamyati.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="красноярский филиал финансового университета при правительстве российской федера... музей техники 👥 велизаде ибрагим исабала оглы; скороходов игорь сергеевич 👨‍🏫 трухан василий николаевич">
+  <div class="vfc-card-org">Красноярский филиал Финансового университета при Правительстве Российской Федера...</div>
+  <div class="vfc-card-theme">Музей техники</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Неоконченное высшее</span></div>
+  <div class="vfc-card-people">👥 Велизаде Ибрагим Исабала оглы; Скороходов Игорь Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Трухан Василий Николаевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/08a/1kmdcwqrdcuwt3r1s1lnu3wrlle9zf6y/Sotsialno_gumanitarnoe_muzey-tekhniki.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="красноярский филиал финансового университета при правительстве российской федера... 3 исторических битвы 👥 вебер даниил михайлович; сосновский сергей александрович 👨‍🏫 нешков дмитрий анатольевич">
+  <div class="vfc-card-org">Красноярский филиал Финансового университета при Правительстве Российской Федера...</div>
+  <div class="vfc-card-theme">3 исторических битвы</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Высшее образование (Специалитет)</span></div>
+  <div class="vfc-card-people">👥 Вебер Даниил Михайлович; Сосновский Сергей Александрович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Нешков Дмитрий Анатольевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/6e4/v77cpkrqh3d38q0z6r32m9mky4yuq097/Napravlenie_3_istoricheskikh_sobytiya.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="красноярский финансово-экономический колледж - филиал федерального государственн... разработка vr-тренажера для запоминания английских слов на платформе varwin xrms 👥 береговых мария сергеевна 👨‍🏫 трухан василий николаевич">
+  <div class="vfc-card-org">КРАСНОЯРСКИЙ ФИНАНСОВО-ЭКОНОМИЧЕСКИЙ КОЛЛЕДЖ - ФИЛИАЛ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕНН...</div>
+  <div class="vfc-card-theme">РАЗРАБОТКА VR-ТРЕНАЖЕРА ДЛЯ ЗАПОМИНАНИЯ АНГЛИЙСКИХ СЛОВ НА ПЛАТФОРМЕ VARWIN XRMS</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее профессиональное</span></div>
+  <div class="vfc-card-people">👥 Береговых Мария Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Трухан Василий Николаевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/dfe/lnbkwhd5x5t03ix64awnbf6eiq81lmn2/Sotsialno_gumanitarnye-nauki_Trenazher-zapominaniya-slov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета серия тематических уроков для 8-9 классов по подготовке к огэ по английскому языку: задания из письменной части 👥 капусткина вероника александровна; капусткина яна александровна , муравьёва мария евгеньевна 👨‍🏫 селиванова вера александровна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">СЕРИЯ ТЕМАТИЧЕСКИХ УРОКОВ ДЛЯ 8-9 КЛАССОВ ПО ПОДГОТОВКЕ К ОГЭ ПО АНГЛИЙСКОМУ ЯЗЫКУ: ЗАДАНИЯ ИЗ ПИСЬМЕННОЙ ЧАСТИ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Капусткина Вероника Александровна; Капусткина Яна Александровна , Муравьёва Мария Евгеньевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Селиванова Вера Александровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/ffe/e2itrbph50h0wn9rdot3okdzgcnwnnml/Metodika-prepodavaniya_Seriya-tematicheskikh-urokov-dlya-8_9-klassov-po-podgotovke-k-OGE-po-angliyskomu-yazyku-zadaniya-iz-pismennoy-chasti.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета виртуальная реальность 👥 сергеев эмиль эльдарович; травкин дмитрий леонидович, абрамов александр павлович 👨‍🏫 никитенко станислав сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Виртуальная реальность</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Сергеев Эмиль Эльдарович; Травкин Дмитрий Леонидович, Абрамов Александр Павлович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Никитенко Станислав Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/aa7/xk6yqyyrx19rh2ckrvm013ziqje52km8/Issledovanie_Vliyanie-tekhnologiy-virtualnoy-realnost-na-emotsionalnoe-sostoyanie-litseistov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета информационные стенды как инструмент визуального обучения 👥 гришин михаил андреевич; шарапов степан данилович, тыченок даниил сергеевич 👨‍🏫 алиев самир алиевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Информационные стенды как инструмент визуального обучения</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Средний</span></div>
+  <div class="vfc-card-people">👥 Гришин Михаил Андреевич; Шарапов Степан Данилович, Тыченок Даниил Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Алиев Самир Алиевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/bd4/bytf8mwxc6l4v4x4x059qgtc2j7pg8l9/tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета псеводоинтернационализмы: причины ошибок при переводе и пути их избегания на примере английского языка 👥 мединская софья леонидовна 👨‍🏫 перелетова екатерина михайловна, привалова любовь михайловна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Псеводоинтернационализмы: причины ошибок при переводе и пути их избегания на примере английского языка</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Мединская Софья Леонидовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Перелетова Екатерина Михайловна, Привалова Любовь Михайловна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/55c/ai7rfl24c185x9xkbnml1it9sftx53sj/TEZISY-Medinskaya-IVR.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета сравнительный анализ рекламных практик в россии и сша в конце xx века и в начале xxi эволюция, особенности и влияние социально-экономических факторов. 👥 свиридова юлия сергеевна; дворянинова кристина ильинична 👨‍🏫 козырев борис александрович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Сравнительный анализ рекламных практик в России и США в конце XX века и в начале XXI эволюция, особенности и влияние социально-экономических факторов.</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Свиридова Юлия Сергеевна; Дворянинова Кристина Ильинична</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Козырев Борис Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/abe/fadaibbs3nxtay5s6nely9rgzxgn45v2/tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета историческая динамика преступности: выявление общих черт и закономерностей криминальных явлений россии в период 19-21 веков 👥 ровенская алёна юрьевна; сафронова ольга андреевна 👨‍🏫 ермолаев фёдор сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Историческая динамика преступности: выявление общих черт и закономерностей криминальных явлений России в период 19-21 веков</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Основное общее</span></div>
+  <div class="vfc-card-people">👥 Ровенская Алёна Юрьевна; Сафронова Ольга Андреевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ермолаев Фёдор Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/e5c/0uuua7wruog9mf75qmtort2fvgnuuhku/Sotsialno_gumanitarnoe-issledovanie-_Istoricheskaya-dinamika-prestupnosti_-doc.odt" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета «русские сезоны» сергея дягилева и их влияние на европейские модные дома начала xx века 👥 сучилина арина алексеевна; климова ева сергеевна 👨‍🏫 бычков михаил андреевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">«Русские сезоны» Сергея Дягилева и их влияние на европейские модные дома начала XX века</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Сучилина Арина Алексеевна; Климова Ева Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Бычков Михаил Андреевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/cdc/91nxp16fo6s0d9j15p8isvi49gya1oyr/Sotsialno-_-gumanitarnye-nauki.-_Kak-russkiy-sezony-Sergeya-Dyagileva-povliyali-na-evropeyskie-modnye-doma-nachalo-20_go-veka.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета разработка коллекции одежды и аксессуаров с принтами по произведениям русской классической литературы для иностранных туристов 👥 романов егор михайлович; кряталов алексей александрович 👨‍🏫 оськина екатерина алексеевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Разработка коллекции одежды и аксессуаров с принтами по произведениям русской классической литературы для иностранных туристов</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Романов Егор Михайлович; Кряталов Алексей Александрович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Оськина Екатерина Алексеевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/3b6/423qbtzacxegl0x2upit6b4n6mg7owvq/Sotsialno_gumanitarnoe_Razrabotka-kollektsii-odezhdy-i-aksessuarov-s-printami-po-proizvedeniyam-russkoy-klassicheskoy-literatury-dlya-innostrannykh-turistov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета своя игра по обществознанию 👥 кольцов всеволод сергеевич 👨‍🏫 ихнева валерия евгеньевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">своя игра по обществознанию</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">основное общее образование</span></div>
+  <div class="vfc-card-people">👥 Кольцов Всеволод Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ихнева Валерия Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/ba7/506mvlmjldn2bfackjzhyk1awj7mn85p/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета «своя игра» по обществознанию 👥 кольцов всеволод сергеевич 👨‍🏫 ихнева валерия евгеньевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">«своя игра» по обществознанию</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее общее</span></div>
+  <div class="vfc-card-people">👥 Кольцов Всеволод Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ихнева Валерия Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/74b/ajph2ockjb8bq4zd9l4fycdy03sh3sw2/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета влияние здорового образа жизни на успеваемость учащихся 10 класса 👥 муратова софья ильясовна 👨‍🏫 фёдоров александр александрович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Влияние здорового образа жизни на успеваемость учащихся 10 класса</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Муратова Софья Ильясовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Фёдоров Александр Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/167/b3ilv1u2n2pq29bme14seeme5a5gvwgh/Sotsialnye-nauki_Vliyanie-zdorovogo-obraza-zhizni-na-uspevvaemost-uchashchikhsya-10-klassa.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета тематический маршрут по достопримечательностям москвы на английском языке 👥 сухарева алина сергеевна; маликов амир айратович, морякова алиса андреевна 👨‍🏫 даттуева эсмира айдыновна, махмутова динара тахировна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Тематический маршрут по достопримечательностям Москвы на Английском языке</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Сухарева Алина Сергеевна; Маликов Амир Айратович, Морякова Алиса Андреевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Даттуева Эсмира Айдыновна, Махмутова Динара Тахировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/f0f/db376chr8hn3esjwshplff8z6fmzqiw8/tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета создание тренировочных заданий в формате егэ по английскому языку, на множественный выбор. 👥 детинкина вера семеновна; овчаренко полина евгеньевна 👨‍🏫 даттуева эсмира айдыновна, махмутова динара тахировна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание тренировочных заданий в формате ЕГЭ по английскому языку, на множественный выбор.</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Детинкина Вера Семеновна; Овчаренко Полина Евгеньевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Даттуева Эсмира Айдыновна, Махмутова Динара Тахировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/efc/okqr3c0yj7g2dub7p0nkflhp517y24kq/Detinkina_Ovcharenko_Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета проблемы общества потребления с точки зрения экзистенциальной философии 👥 сорокин фёдор алексеевич 👨‍🏫 козырев борис александрович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Проблемы общества потребления с точки зрения экзистенциальной философии</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Сорокин Фёдор Алексеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Козырев Борис Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/df6/ik89at4mgj8pmgtnnyhkm03gqdzbw1yr/Sorokin-Varfin-Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета правовая система россии в период петровских преобразований 👥 мостипан валентина александровна 👨‍🏫 бычков михаил андреевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Правовая система России в период Петровских преобразований</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Мостипан Валентина Александровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Бычков Михаил Андреевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/1e0/4rtbhb0caeblsjqmgm6wbgz9fvkiub98/Mostipan_IVR_tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета создание тренировочных заданий в формате егэ по английскому языку на множественный выюор. 👥 детинкина вера семеновна; овчаренко полина евгеньевна 👨‍🏫 даттуева эсмира айдыновна, махмутова динара тахировна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание тренировочных заданий в формате ЕГЭ по английскому языку на множественный выюор.</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Детинкина Вера Семеновна; Овчаренко Полина Евгеньевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Даттуева Эсмира Айдыновна, Махмутова Динара Тахировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/129/v77ohflfama48n8qli90f1ulae6aox3f/Detinkina_Ovcharenko_Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета вли]ние мобильных технологий на качество коммуникаций подростков 👥 коновалов иван алексеевич 👨‍🏫 коновалов максим анатольевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Вли]ние мобильных технологий на качество коммуникаций подростков</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Коновалов Иван Алексеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Коновалов Максим Анатольевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/813/5tcp1cwfvrfiwybtpeno21m0aijdj85l/Tezisy-IVR.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета причины недоверия российских граждан к финансовым инструментам 👥 вердегло глеб алексеевич; вердегло глеб алексеевич 👨‍🏫 бычков михаил андреевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">ПРИЧИНЫ НЕДОВЕРИЯ РОССИЙСКИХ ГРАЖДАН К ФИНАНСОВЫМ ИНСТРУМЕНТАМ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее</span></div>
+  <div class="vfc-card-people">👥 Вердегло Глеб Алексеевич; Вердегло Глеб Алексеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Бычков Михаил Андреевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/9eb/alx7ra329zeir35c9o1mtm0bcqdhuvyv/Ekonomicheskaya-sotsiologiya-i-povedencheskie-finansy_Prichiny-nedoveriya-rossiyskikh-grazhdan-k-finansovym-instrumentam.doc.pdf" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета информационные технологии как инструмент принятия инвестиционных решений 👥 кравчук анастасия юрьевна 👨‍🏫 дубенецкая елена рудольфовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Информационные технологии как инструмент принятия инвестиционных решений</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее общее</span></div>
+  <div class="vfc-card-people">👥 Кравчук Анастасия Юрьевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Дубенецкая Елена Рудольфовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/ff7/p83cic9ub84cvdv9bw7pinxbwuqclb5x/kravchuk_tezis.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета исследование применения «binomials» b английском языке для обогащения речи. 👥 кучкаров алистер алишерович; ахмедханова софия максимовна, озивский кирилл иванович 👨‍🏫 махмутова динара тахировна, даттуева эсмира айдыновна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">ИССЛЕДОВАНИЕ ПРИМЕНЕНИЯ «binomials» B АНГЛИЙСКОМ ЯЗЫКЕ ДЛЯ ОБОГАЩЕНИЯ РЕЧИ.</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Кучкаров Алистер Алишерович; Ахмедханова София Максимовна, Озивский Кирилл Иванович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Махмутова Динара Тахировна, Даттуева Эсмира айдыновна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/64a/zx8bmxeks9tzlumthz0vlbqftyyvur7r/Proektnaya-rabota-_binomials_2.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета кому на руси жить хорошо? версия 2.0 👥 ситников глеб артемович; озерная ксения владимировна 👨‍🏫 капустина галина леонидовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Кому на Руси жить хорошо? Версия 2.0</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Ситников Глеб Артемович; Озерная Ксения Владимировна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Капустина Галина Леонидовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/39b/szkxemudca9tcd4oi6zb6omtjyfjfuk8/Sitnikov_Ozernaya_tezisy.pdf" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета создание сми на базе лицея финансового университета 👥 широков никита владиславович; заворотнов денис евгеньевич , добрынина александра сергеевна 👨‍🏫 капустина галина леонидовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание СМИ на базе Лицея Финансового Университета</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Широков Никита Владиславович; Заворотнов Денис Евгеньевич , Добрынина Александра Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Капустина Галина Леонидовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/1af/7w8if0ibiu8imoo3r208l156ax42tx6v/Sotsialno_gumanitarnoe_Sozdanie_SMI.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета буллинг и кибербуллинг: правовые и психологические аспекты 👥 лапкина ангелина алексеевна; гдлян арина мартиновна 👨‍🏫 хозиев сергей заурбекович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Буллинг и кибербуллинг: правовые и психологические аспекты</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10</span></div>
+  <div class="vfc-card-people">👥 Лапкина Ангелина Алексеевна; Гдлян Арина Мартиновна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Хозиев Сергей Заурбекович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/96a/0t1hck1s4fep5n9q0d315jf3g1trdn6m/tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета как социальные сети влияют на общественное мнение 👥 пузырева милана павловна 👨‍🏫 дубенецкая елена рудольфовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Как социальные Сети влияют на общественное мнение</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10г класс</span></div>
+  <div class="vfc-card-people">👥 Пузырева Милана Павловна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Дубенецкая Елена Рудольфовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/763/it31z7s3tkrnnoqj420a3jqj0ebjd4du/Puzyreva_tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета анализ ключевых показателей эффективности национальных систем образования кнр и рф 👥 ушанова екатерина ильинична 👨‍🏫 коновалов максим анатольевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Анализ ключевых показателей эффективности национальных систем образования КНР и РФ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Ушанова Екатерина Ильинична</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Коновалов Максим Анатольевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/187/c70qk659rrd8m5bvl0tuc52f4gj5fncv/Sotsialno_gumanitarnye-nauki_Analiz-klyuchevykh-pokazateley-effektivnosti-natsionalnykh-sistem-obrazovaniya-KNR-i-RF_2.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета психологическое благополучие подростков 👥 пышкин кирилл сергеевич; чернецкий максимильян игоревич 👨‍🏫 хозиев сергей заурбекович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Психологическое благополучие подростков</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Пышкин Кирилл Сергеевич; Чернецкий Максимильян Игоревич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Хозиев Сергей Заурбекович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/478/5ekk5atg3yoau21nsd7scvntf9zo2umb/Sotsialno_gumanitarnye-nauki_Psikhologicheskoe-blagopoluchie-podrostkov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета влияние футбола на экономику развивающихся стран 👥 яковлев михаил евгеньевич 👨‍🏫 коновалов максим анатольевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Влияние футбола на экономику развивающихся стран</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">средне общее образование</span></div>
+  <div class="vfc-card-people">👥 Яковлев Михаил Евгеньевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Коновалов Максим Анатольевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/75b/evu311n2xkkrmb2wh93kspr5ezq9eeia/Tezisy-IVR.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета налогообложение топливно-энергетического комплекса российской федерации 👥 пименова мария петровна 👨‍🏫 ермолаев федор сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Налогообложение Топливно-энергетического комплекса Российской Федерации</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее общее</span></div>
+  <div class="vfc-card-people">👥 Пименова Мария Петровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ермолаев Федор Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/17f/mllgo546413u04iwlk0j0b3baz18np5o/Sotsialno_gumanitarnye-nauki_Nalogooblozhenie-toplivno_energeticheskogo-kompleksa-v-RF.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета государственно-частное партнерство как инструмент решения проблемы растущего спроса на электроэнергию со стороны центров обработки данных 👥 варижук константин иванович 👨‍🏫 ермолаев федор сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">ГОСУДАРСТВЕННО-ЧАСТНОЕ ПАРТНЕРСТВО КАК ИНСТРУМЕНТ РЕШЕНИЯ ПРОБЛЕМЫ РАСТУЩЕГО СПРОСА НА ЭЛЕКТРОЭНЕРГИЮ СО СТОРОНЫ ЦЕНТРОВ ОБРАБОТКИ ДАННЫХ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Варижук Константин Иванович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ермолаев Федор Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/d10/8mqjxuaayncz509ajfuck40pckg243k8/Sotsialno_gumanitarnoe_GCHP-KAK-INSTRUMENT-RESHENIYA-PROBLEMY-RASTUSHCHEGO-SPROSA-NA-ELEKTROENERGIYU-SO-STORONY-TSENTROV-OBRABOTKI-DANNYKH.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета особенности формирования межличностных знакомств в детском и подростковом возрасте 👥 нагайцева ангелина константиновна 👨‍🏫 алиева мария леонидовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Особенности формирования межличностных знакомств в детском и подростковом возрасте</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Нагайцева Ангелина Константиновна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Алиева Мария Леонидовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/dbd/syhlgbtqmee1cvv5n2p46q7fuo4e749c/Sotsialno_gumanitarnoe_-napravlenie_Osobennosti-formirovaniya-mezhlichnostnykh-znakomstv-v-detskom-i-podrostkovom-vozraste.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета финансовая грамотность среди учеников 10-11 классов лфу 👥 веремеева маргарита дмитриевна 👨‍🏫 ненаглядова ксения николаевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Финансовая грамотность среди учеников 10-11 классов Лфу</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее общее</span></div>
+  <div class="vfc-card-people">👥 Веремеева Маргарита Дмитриевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ненаглядова Ксения Николаевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/235/h9tf690fjlpfwt2uvosnx7xw9xqxoxh2/tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета сравнение проявления расстройства пищевого поведения как культурного аспекта в разных странах мира (россия, сша, южная корея) 👥 тропина татьяна михайловна; сычинская мария михайловна 👨‍🏫 хозиев сергей заурбекович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Сравнение проявления расстройства пищевого поведения как культурного аспекта в разных странах мира (Россия, США, Южная Корея)</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее основное (10 класс)</span></div>
+  <div class="vfc-card-people">👥 Тропина Татьяна Михайловна; Сычинская Мария Михайловна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Хозиев Сергей Заурбекович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/802/r1zxy5b5rkxrunany2bx95d3z2c5n22x/Tezisy_Raboty.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета «формирование финансовой грамотности среди людей 14-25 лет» 👥 шевцов артём анатольевич 👨‍🏫 козырев борис александрович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">«Формирование финансовой грамотности среди людей 14-25 лет»</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Шевцов Артём Анатольевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Козырев Борис Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/bc3/pn3w0rzmzjv3g7wh1ekvwyt0qf0ivqis/Tezisy-.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета концепция агентства greenspark grants: помощь организациям в привлечении экологического финансирования 👥 папиянц маргарита павловна; потапкина вероника владимировна 👨‍🏫 коновалов максим анатольевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Концепция агентства Greenspark Grants: помощь организациям в привлечении экологического финансирования</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Папиянц Маргарита Павловна; Потапкина Вероника Владимировна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Коновалов Максим Анатольевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/393/rjp6t6hogf8yslsjbpbhu104feirslnh/Tezisy_Potapkina_Papiyants-.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета эволюция престижного потребительского поведения в постсоветской россии 👥 буркин дмитрий сергеевич 👨‍🏫 ермолаев фёдор сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Эволюция престижного потребительского поведения в постсоветской России</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Буркин Дмитрий Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ермолаев Фёдор Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/376/3vcazwypvorncgc9kliuccio20s06she/Napravlenie-sotsialno_gumanitarnykh-nauk_Evolyutsiya-prestizhnogo-potrebitelskogo-povedeniya-v-postsovetskoy-Rossii.doc" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета роль искусственного интеллекта в рациональном управлении природными ресурсами для достижения целей устойчивого развития 👥 бессолицын борис олегович 👨‍🏫 ихнева валерия евгеньевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Роль искусственного интеллекта в рациональном управлении природными ресурсами для достижения целей устойчивого развития</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">основное общее образование (10 класс)</span></div>
+  <div class="vfc-card-people">👥 Бессолицын Борис Олегович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ихнева Валерия Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/3a3/fghf81ral54uas89zxroe1okm3zs5ml3/Sotsialno_gumanitarnye-nauki_Rol-iskusstvennogo-intellekta-v-ratsionalnom-upravlenii-prirodnymi-resursami-dlya-dostizheniya-tseley-ustoychivogo-razvitiya.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета создание видеоролика &quot;обзор лицея финансового университета при правительстве рф ко дню открытых дверей&quot; 👥 ганджунцева полина антоновна; цуканова софья романовна 👨‍🏫 козырев борис александрович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание видеоролика "Обзор Лицея Финансового Университета при Правительстве РФ ко дню открытых дверей"</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Ганджунцева Полина Антоновна; Цуканова Софья Романовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Козырев Борис Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/088/lbdpedrtxil6lp8rj38hyy8tma1it4ex/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета способы 👥 уваров егор вадимович 👨‍🏫 хозиев сергей заурбекович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Способы</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">основное общее</span></div>
+  <div class="vfc-card-people">👥 Уваров Егор Вадимович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Хозиев Сергей Заурбекович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/090/5b3pwn53vq7kv7j14tzb9rme7n80lnr7/Tezisy-IVR.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета составление банка заданий формата единого государственного экзамена по английскому языку по аудированию и чтению 👥 стелецкая агата кирилловна; селиванова елизавета дмитриевна 👨‍🏫 даттуева эсмира айдыновна и махмутова динара тахировна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Составление банка заданий формата единого государственного экзамена по английскому языку по аудированию и чтению</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Стелецкая Агата Кирилловна; Селиванова Елизавета Дмитриевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Даттуева Эсмира Айдыновна и Махмутова Динара Тахировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/ef2/urgfr8e4s76qf1mudftjnzradlcleo1i/TEZISY-PROEKTNOY-RABOTY.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета факторы формирования общественного мнения по вопросам современной политики, на примере учеников финуниверситета 👥 омельчук екатерина андреевна; дегтярева мария олеговна 👨‍🏫 ихнева валерия евгеньевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Факторы формирования общественного мнения по вопросам современной политики, на примере учеников Финуниверситета</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Омельчук Екатерина Андреевна; Дегтярева Мария Олеговна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ихнева Валерия Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/71b/m0r9r436kdor9bxsqy18vgzv64g24l0j/tezisy-omelchuk-degtyareva-ivr-.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета культурные табу в английском и русском языках 👥 шамин матвей сергеевич 👨‍🏫 привалова любовь михайловна, перелетова екатерина михайловна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Культурные табу в английском и русском языках</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10</span></div>
+  <div class="vfc-card-people">👥 Шамин Матвей Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Привалова Любовь Михайловна, Перелетова Екатерина Михайловна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/822/kbwpn3ahya41dd2um7z2u9grb0omnpps/SHAMIN_IVR_TEZISY.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета социальный видео-проект «не стань орудием: как защититься от вербовки» 👥 сапрыгина мария константиновна 👨‍🏫 дубенецкая елена рудольфовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">СОЦИАЛЬНЫЙ ВИДЕО-ПРОЕКТ «НЕ СТАНЬ ОРУДИЕМ: КАК ЗАЩИТИТЬСЯ ОТ ВЕРБОВКИ»</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Сапрыгина Мария Константиновна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Дубенецкая Елена Рудольфовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/bc8/o2f3sew68xd3rtj6hpyk659d360qnj63/Sotsialno_gummanitarnye-nauki_Ne-stan-orudiem-kak-zashchititsya-ot-verbovki.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета этика искусственного интеллекта в развитии правовых систем современности​​ 👥 козловский архип 👨‍🏫 эйсымонт инна михайловна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">ЭТИКА ИСКУССТВЕННОГО ИНТЕЛЛЕКТА В РАЗВИТИИ ПРАВОВЫХ СИСТЕМ СОВРЕМЕННОСТИ​​</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10 Класс</span></div>
+  <div class="vfc-card-people">👥 Козловский Архип</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Эйсымонт Инна Михайловна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/42f/y795nao8aeyi5otckg1sog6295kzksim/Tezis.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета перспективы сотрудничества с катаром для российского бизнеса 👥 ломакин николай ильич 👨‍🏫 ермолаев фёдор сергеевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Перспективы сотрудничества с Катаром для российского бизнеса</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Ломакин Николай Ильич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ермолаев Фёдор Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/697/lk26ofe50toqluj92b3sf54ovk56dd9b/Ekonomika_Perspektivy_sotrudnichestva_s_Katarom_dlya_rossiyskogo.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета трансформация образа героя: как современные герои влияют на самоидентификацию и поведение молодёжи 👥 хворостяная полина дмитриевна 👨‍🏫 козырев борис александрович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Трансформация образа героя: как современные герои влияют на самоидентификацию и поведение молодёжи</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Хворостяная Полина Дмитриевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Козырев Борис Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/bbe/jedicwkd3fzybyz0wmzokanxo6v6e2rc/Sotsiologiya_Transformatsiya-obraza-geroya.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета культура отмены как предмет современной стигматизации 👥 водолазская ирина владимировна; пирадова полина александровна 👨‍🏫 ихнева валерия евгения">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Культура отмены как предмет современной стигматизации</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Основное общее</span></div>
+  <div class="vfc-card-people">👥 Водолазская Ирина Владимировна; Пирадова Полина Александровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ихнева Валерия Евгения</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/2fe/p58vqej2141rpn1myoyf9h6eljd20g3r/Sotsialno_gumanitarnye-nauki.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета факторы, влияющие на формирование общественного мнения в контексте современной политики, на примере учеников лицея финуниверситета 👥 омельчук екатерина андреевна; дегтярева мария олеговна 👨‍🏫 ихнева валерия евгеньевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Факторы, влияющие на формирование общественного мнения в контексте современной политики, на примере учеников Лицея Финуниверситета</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Омельчук Екатерина Андреевна; Дегтярева Мария Олеговна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ихнева Валерия Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/06e/ifaj2du5ilvrigt9x7hx92qiv9cs5oan/tezisy-omelchuk-degtyareva-ivr-.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета позиция современной молодежи о перераспределении ресурсов в контексте теорий ролза и нозика 👥 юнин иван алексеевич 👨‍🏫 бычков михаил андреевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">ПОЗИЦИЯ СОВРЕМЕННОЙ МОЛОДЕЖИ О ПЕРЕРАСПРЕДЕЛЕНИИ РЕСУРСОВ В КОНТЕКСТЕ ТЕОРИЙ РОЛЗА И НОЗИКА</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Юнин Иван Алексеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Бычков Михаил Андреевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/bad/vhx1qkkhzv4mj3zveqqsm1emilv6qmbw/Filosofiya_Pozitsiya-sovremennoy-molodezhi-o-pereraspredelenii-resursov.doc" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета история и перспективы развития женского образования в россии 👥 михайлова юлия андреевна 👨‍🏫 бычков михаил андреевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">История и перспективы развития женского образования в России</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее общее</span></div>
+  <div class="vfc-card-people">👥 Михайлова Юлия Андреевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Бычков Михаил Андреевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/179/3chy00piqkppeyrbrxr56vyh73lbuqzc/Sotsialno_Gumanitarnye-nauki_Razvitie-zhenskogo-obrazovaniya.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета роль семейного неблагополучия в формировании девиантного поведения и академической неуспеваемости старшеклассников. 👥 глушенкова ольга олеговна 👨‍🏫 хозиев сергей заурбекович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Роль семейного неблагополучия в формировании девиантного поведения и академической неуспеваемости старшеклассников.</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Глушенкова Ольга Олеговна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Хозиев Сергей Заурбекович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/9bc/c1q2zeknh0a12epydluxezxhirz05z0z/IVR_Glushenkova.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета влияние популяризации демонстративного потребления через социальные сети на поведенческую модель поколения z (на примере школьников г. москвы)) 👥 колзунова софия руслановна 👨‍🏫 хозиев сергей заурбекович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Влияние популяризации демонстративного потребления через социальные сети на поведенческую модель поколения Z (На примере школьников г. Москвы))</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее, 10 класс</span></div>
+  <div class="vfc-card-people">👥 Колзунова София Руслановна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Хозиев Сергей Заурбекович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/01f/t3vzj6fhvsocvkw4e575d08l36ebvfpv/Sotsiologiya_Vliyanie-demonstrativnogo-potrebleniya-cherez-sotsialnye-seti-na-povedencheskuyu-model-predstaviteley-pokoleniya-Z.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета культура отмены как предмет современной стигматизации 👥 водолазская ирина владимировна; пирадова полина александровна 👨‍🏫 ихнева валерия евгеньевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Культура отмены как предмет современной стигматизации</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Основное общее</span></div>
+  <div class="vfc-card-people">👥 Водолазская Ирина Владимировна; Пирадова Полина Александровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ихнева Валерия Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/7fa/nmccbgtusgoel8o6o1yq44l7mr74nv0c/Tezisy-nauch-iss.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета пути изучения русского языка с помощью интернет (создание лендинговой страницы с использованием мультимедийного материала) 👥 козловская ксения артёмовна 👨‍🏫 фёдоров александр александрович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Пути изучения русского языка с помощью интернет (создание лендинговой страницы с использованием мультимедийного материала)</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Козловская Ксения Артёмовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Фёдоров Александр Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/234/ht06i9s6phu9hxa0lhf2fpo56wnzwqui/Sotsialno_gumanitarnye-nauki_Puti-izucheniya-russkogo-yazyka-s-pomoshchyu-internet.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета факторы, влияющие на культуру потребления товаров длительного пользования среди молодежи (на примере учащихся лицея финуниверситета) 👥 анисимова анна александровна; рзаева камила руслановна 👨‍🏫 ихнева валерия евгеньевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Факторы, влияющие на культуру потребления товаров длительного пользования среди молодежи (на примере учащихся Лицея Финуниверситета)</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Анисимова Анна Александровна; Рзаева Камила Руслановна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ихнева Валерия Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/1f7/hfkl819koowr5t48ojp32oe2x98i0vpt/Tezisy_Anisimova_Rzaeva_IVR.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета цифровой рубль как инструмент финансового контроля в государственном управлении 👥 каткова дарья александровна 👨‍🏫 козырев борис александрович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Цифровой рубль как инструмент финансового контроля в государственном управлении</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Каткова Дарья Александровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Козырев Борис Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/e2d/lrjkptfm6pzb029z0k6z57zruuk0h0ti/TSifrovoy_rubl_kak_instrument_finansovogo_kontrolya_v_gosudarstvennom_upravlenii.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета влияние цифровых медиа на эволюцию современного английского языка 👥 ковальчук софия александровна 👨‍🏫 даттуева эсмира айдыновна, махмутова динара тахировна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Влияние цифровых медиа на эволюцию современного английского языка</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Ковальчук София Александровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Даттуева Эсмира Айдыновна, Махмутова Динара Тахировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/e84/ywbp0400b29n3vcs7r0tp2y6n6ahm6is/Issledovanie_VLIYANIE-TSIFROVYKH-MEDIA-NA-EVOLYUTSIYU-SOVREMENNOGO-ANGLIYSKOGO-YAZYKA.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета влияние цифровых медиа на эволюцию современного английского языка 👥 ковальчук софия александровна 👨‍🏫 даттуева эсмира айдыновна, махмутова динара тахировна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Влияние цифровых медиа на эволюцию современного английского языка</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Ковальчук София Александровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Даттуева Эсмира Айдыновна, Махмутова Динара Тахировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/a19/kbp83ajjm8l8qkfz9n9vpf9if7q5tvnr/Issledovanie_VLIYANIE-TSIFROVYKH-MEDIA-NA-EVOLYUTSIYU-SOVREMENNOGO-ANGLIYSKOGO-YAZYKA.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета предпосылки, причины и последствия экономического застоя в японии и сравнение с экономическим положением россии 👥 инкин александр витальевич 👨‍🏫 хозиев сергей заурбекович">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">ПРЕДПОСЫЛКИ, ПРИЧИНЫ И ПОСЛЕДСТВИЯ ЭКОНОМИЧЕСКОГО ЗАСТОЯ В ЯПОНИИ И СРАВНЕНИЕ С ЭКОНОМИЧЕСКИМ ПОЛОЖЕНИЕМ РОССИИ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Инкин Александр Витальевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Хозиев Сергей Заурбекович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/165/vrlmipef2c17f920ztk7fzncnfw1ewzu/PREDPOSYLKI-PRICHINY-I-POSLEDSTVIYA-EKONOMICHESKOGO-ZASTOYA-V-YAPONII-I-SRAVNENIE-S.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета роль английского языка в туризме и его влияние на развитие туристической индустрии 👥 юшкова анна дмитриевна 👨‍🏫 привалова л.м. и перелётова е.м">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Роль английского языка в туризме и его влияние на развитие туристической индустрии</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Неполное среднее</span></div>
+  <div class="vfc-card-people">👥 Юшкова Анна Дмитриевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Привалова Л.М. и Перелётова Е.М</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/e0a/c05ll6ycj970lgssos7zeu74togsf3wu/YUshkova-Anna-Dmitrievna-tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="лицей финуниверситета серия тематических уроков для 8-9 классов по подготовке к огэ по английскому языку: задания по лексике и грамматике 👥 ершова арина александровна; ярцева елизавета игоревна 👨‍🏫 селиванова вера александровна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">СЕРИЯ ТЕМАТИЧЕСКИХ УРОКОВ ДЛЯ 8-9 КЛАССОВ ПО ПОДГОТОВКЕ К ОГЭ ПО АНГЛИЙСКОМУ ЯЗЫКУ: ЗАДАНИЯ ПО ЛЕКСИКЕ И ГРАММАТИКЕ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее общее(10 класс)</span></div>
+  <div class="vfc-card-people">👥 Ершова Арина Александровна; Ярцева Елизавета Игоревна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Селиванова Вера Александровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/83e/ehxh63him5wj7qjpokg8y3offdwv1b1t/YArtseva-Ershova-tezisy.pdf" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж оптимизация логистических процессов на основе анализа данных из цифровых двойниковы складов в vr-среде 👥 ильина мария александровна; спиридонов ярослав станиславович 👨‍🏫 жуков михаил михайлович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Оптимизация логистических процессов на основе анализа данных из цифровых двойниковы складов в VR-среде</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее профессиональное</span></div>
+  <div class="vfc-card-people">👥 Ильина Мария Александровна; Спиридонов Ярослав Станиславович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Михаил Михайлович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/1e3/5yacnpxn8txnjzaotis5fs78jntd4b3d/Sotsialno_gumanitarnye-nauki-_-Optimizatsiya-logisticheskie-protsessy-na-osnove-analiza-dannykh-iz-tsifrovykh-dvoynikov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж &quot;виртуальные филиалы банков: экономическая эффективность и user experience&quot; 👥 рудаков прохор алексеевич; димаксян васико эдгарович 👨‍🏫 жуков михаил михайлович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">"Виртуальные филиалы банков: Экономическая эффективность и user experience"</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее профессиональное</span></div>
+  <div class="vfc-card-people">👥 Рудаков Прохор Алексеевич; Димаксян Васико Эдгарович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Михаил Михайлович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/45a/15vdo3ke206kvimdl630bznhirho67tf/Sotsialno_gumantiranye-nauki-Virtualnye-filialy-bankov-Ekonomicheskaya-effektivnost-i-user-experience.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж моделирование ситуаций для оптимизации переговоров и продаж 👥 акобян ани арамовна; соколова арина ильинична 👨‍🏫 савушкина елена олеговна">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Моделирование ситуаций для оптимизации переговоров и продаж</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">студенты СПО</span></div>
+  <div class="vfc-card-people">👥 Акобян Ани Арамовна; Соколова Арина Ильинична</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Савушкина Елена Олеговна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/1c2/tm0o3vm7732yz248mvsh4yexfcukdo2e/Sotsialno_gumanitarnye_nauki_modelirovanie_situatsii_774_dlya_optimizatsii_peregovorov_i_prodazh.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж &quot;цена ошибки: экономическая выгода от обучения космонавтов и хирургов в vr-тренажёрах&quot; 👥 морозова анна ильинична; кошурина арина олеговна 👨‍🏫 жуков михаил михайлович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">"Цена ошибки: экономическая выгода от обучения космонавтов и хирургов в VR-тренажёрах"</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее профессиональное</span></div>
+  <div class="vfc-card-people">👥 Морозова Анна Ильинична; Кошурина Арина Олеговна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Михаил Михайлович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/0b3/j5any4tzcyexax2zz5lvpihbty5j2gyz/VR_-tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж «виртуальный медицинский ассистент: ии. помощь vr очков в медицине» 👥 гаджикеримова диана тельмановна; мазова ульяна сергеевна, бугаева анна алексеевна, боркова дарья романовна 👨‍🏫 никифорова александра евгеньевна">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">«Виртуальный медицинский ассистент: ИИ. Помощь VR очков в медицине»</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Гаджикеримова Диана Тельмановна; Мазова Ульяна Сергеевна, Бугаева Анна Алексеевна, Боркова Дарья Романовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Никифорова Александра Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/064/3yjirrtqyyupo62l2j4uf7ptwwl57udl/Sotsialno_gumanitarnye-nauki_Virtualnyy-meditsinskiy-assistent-II.-Pomoshch-VR-ochkov-v-meditsine_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж &quot;vr-тренажер для начинающих инвесторов в виртуальную недвижимость&quot; 👥 прокошина полина сергеевна; калимханова жамиля асланбековна 👨‍🏫 жуков михаил михайлович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">"VR-тренажер для начинающих инвесторов в виртуальную недвижимость"</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее специальное</span></div>
+  <div class="vfc-card-people">👥 Прокошина Полина Сергеевна; Калимханова Жамиля Асланбековна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Михаил Михайлович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/4ce/fu1mo2sgs73vgwpo803uwtpjgql30kml/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж экономический vr-музей 👥 сучкова анастасия дмитриевна; иванникова надежда сергеевна, бескоровайная дарья алексеевна 👨‍🏫 гладких александра евгеньевна">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Экономический VR-музей</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Основное общее</span></div>
+  <div class="vfc-card-people">👥 Сучкова Анастасия Дмитриевна; Иванникова Надежда Сергеевна, Бескоровайная Дарья Алексеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Гладких Александра Евгеньевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/a95/wy93okdewjmsszwlotbo0v8pkglww6dh/Sotsialno_gumunitarnye-nauki_Ekonomicheskiy-VR_muzey.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж противодействие мошенническим схемам в онлайн-банкинге как элемент повышения финансовой грамотности 👥 шикотенко виктория евгеньевна; творогова мария николаевна 👨‍🏫 савушкина елена олеговна">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Противодействие мошенническим схемам в онлайн-банкинге как элемент повышения финансовой грамотности</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее профессиональное</span></div>
+  <div class="vfc-card-people">👥 Шикотенко Виктория Евгеньевна; Творогова Мария Николаевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Савушкина Елена Олеговна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/0c4/7q1owfjm08l0ygnfc1hhcc5zektysbgu/Napravlenie-sotsialno_gumanitarnykh-nauk_Protivodeystvie-moshennicheskim-skhemam-v-onlayn_bankinge-kak-element-finansovoy-gram...docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж разработка стартапов с использованием vr -технологий: как минимизировать риски? 👥 житенева марина константиновна; овдиюк лилия евгеньевна 👨‍🏫 савушкина елена олеговна">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">РАЗРАБОТКА СТАРТАПОВ С ИСПОЛЬЗОВАНИЕМ VR -ТЕХНОЛОГИЙ: КАК МИНИМИЗИРОВАТЬ РИСКИ?</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">студенты 2 курса СПО</span></div>
+  <div class="vfc-card-people">👥 Житенева Марина Константиновна; Овдиюк Лилия Евгеньевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Савушкина Елена Олеговна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/803/mmw43bs3yiehhilj36mjjtzapnefviy4/Razrabotka-startapov-s-ispolzovaniem-VR-_tekhnologiy-ZHiteneva-Ovdiyuk.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж образ идеального мужчины/женщины в современных медиа: как реклама диктует нам стандарты красоты 👥 чернецкая юлия алексеевна; шпигер дарья владимировна, сулейманова карина гаджибуттаевна, рожкова полина олеговна 👨‍🏫 матиев арслан шахсултанович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Образ идеального мужчины/женщины в современных медиа: как реклама диктует нам стандарты красоты</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">спо</span></div>
+  <div class="vfc-card-people">👥 Чернецкая Юлия Алексеевна; Шпигер Дарья Владимировна, Сулейманова Карина Гаджибуттаевна, Рожкова Полина Олеговна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Матиев Арслан Шахсултанович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/d2a/la99o5cjpw2d19nsnlp0hr1gxndtoonb/Sotsialno_gumanitarnye-nauki_Obraz-idealnogo-muzhchiny-ili-zhenshchiny-v-sovremennykh-media.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж vr в логистике: от проектирования склада до построения маршрута 👥 алексеева екатерина сергеевна; гинятуллина румия рустамовна 👨‍🏫 сашавушкина елена олеговна">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Vr в логистике: от проектирования склада до построения маршрута</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Второй курс СПО</span></div>
+  <div class="vfc-card-people">👥 Алексеева Екатерина Сергеевна; Гинятуллина Румия Рустамовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Сашавушкина Елена Олеговна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/f05/3duiok31phyr0f8vewqdu14z2xp0hvt6/VR-v-logistike_-ot-proektirovaniya-sklada-do-postroeniya-marshruta-Proektnaya-rabota-Alekseeva-Ginyatullina.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж анализ рынка образовательных vr/ar-приложений в сфере образования: состояние на данный момент и перспективы развития 👥 данилов николай романович 👨‍🏫 матиев арслан шахсултанович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Анализ рынка образовательных VR/AR-приложений в сфере образования: состояние на данный момент и перспективы развития</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">неполное профессиональное средние</span></div>
+  <div class="vfc-card-people">👥 Данилов Николай Романович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Матиев Арслан Шахсултанович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/b75/p8wgcwlyu8e5979r8fvbsqiiyypug6zo/NIR-VRAR-nikolay-danilov-25OF3.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж vr – платформа в анализе финансовых рисков 👥 бурмистрова елизавета викторовна; семина арина сергеевна 👨‍🏫 савушкина елена олеговна">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">VR – ПЛАТФОРМА В АНАЛИЗЕ ФИНАНСОВЫХ РИСКОВ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Студенты 2 курса СПО</span></div>
+  <div class="vfc-card-people">👥 Бурмистрова Елизавета Викторовна; Семина Арина Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Савушкина Елена Олеговна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/320/36pmuy6y5qveabjxf0ozh9t6k5psy6db/Burmmstrova-Elizaveta_-Semina-Arina_-analiz-finansovykh-riskov.pptx.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж vr – платформа в анализе финансовых рисков 👥 бурмистрова елизавета викторовна; семина арина сергеевна 👨‍🏫 савушкина елена олеговна">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">VR – ПЛАТФОРМА В АНАЛИЗЕ ФИНАНСОВЫХ РИСКОВ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Студенты 2 курса СПО</span></div>
+  <div class="vfc-card-people">👥 Бурмистрова Елизавета Викторовна; Семина Арина Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Савушкина Елена Олеговна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/44e/w90k8whwe0w3a1ap0enivhzamz7ircy0/Burmmstrova-Elizaveta_-Semina-Arina_-analiz-finansovykh-riskov.pptx.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж восьмая сталинская высотка: история и реконструкция 👥 хаустова алеся алексеевна; лошакова елизавета алексеевна 👨‍🏫 матиев арслан шахсултанович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Восьмая сталинская высотка: история и реконструкция</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Хаустова Алеся Алексеевна; Лошакова Елизавета Алексеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Матиев Арслан Шахсултанович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/297/ut3nm3c3bizn4t3v0xncox7y5wrhbb3f/Issledovatelskaya_rabota_VaRFin.doc" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="московский финансовый колледж влияние распределение бюджета на развитие города: vr-симулятор «управление городским бюджетом» 👥 тихоненкова анастасия павловна; могушков казбулат хамзатович 👨‍🏫 жуков михаил михайлович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">ВЛИЯНИЕ РАСПРЕДЕЛЕНИЕ БЮДЖЕТА НА РАЗВИТИЕ ГОРОДА: VR-СИМУЛЯТОР «УПРАВЛЕНИЕ ГОРОДСКИМ БЮДЖЕТОМ»</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее профессиональное образование</span></div>
+  <div class="vfc-card-people">👥 Тихоненкова Анастасия Павловна; Могушков Казбулат Хамзатович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Михаил Михайлович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/fb8/w2bhk67t0x1x59q906s4lgwtx30lojcs/Sotsialno_gumanitarnye_Upravlenie-gorodskim-byuzhetom_Mogushkov_Tikhonenkova.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="пермский финансово-экономический колледж – филиал федерального государственного ... виртуальный музей истории вычислительной техники 👥 виноградов марк александрович 👨‍🏫 масагутова диана айдаровна">
+  <div class="vfc-card-org">Пермский финансово-экономический колледж – филиал федерального государственного ...</div>
+  <div class="vfc-card-theme">ВИРТУАЛЬНЫЙ МУЗЕЙ ИСТОРИИ ВЫЧИСЛИТЕЛЬНОЙ ТЕХНИКИ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Виноградов Марк Александрович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Масагутова Диана Айдаровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/820/btfdhcyy2wehsuaz8xf8252odcnzts2x/Vinogradov_tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="пермский финансово-экономический колледж – филиал федерального государственного ... разработка интерактивного обучения по финансовой безопасности в среде varwin 👥 останина луиза анатольевна 👨‍🏫 масагутова диана айдаровна">
+  <div class="vfc-card-org">Пермский финансово-экономический колледж – филиал федерального государственного ...</div>
+  <div class="vfc-card-theme">РАЗРАБОТКА ИНТЕРАКТИВНОГО ОБУЧЕНИЯ ПО ФИНАНСОВОЙ БЕЗОПАСНОСТИ В СРЕДЕ VARWIN</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Останина Луиза Анатольевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Масагутова Диана Айдаровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/1e1/bsngucr2g1fed61ybzeb5jdgt9wjwaxr/Ostanina_Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="смоленский филиал федерального государственного образовательного бюджетного учре... буква «ё» и ее борьба за существование 👥 прижимов дмитрий андреевич; игнатов глеб сергеевич 👨‍🏫 гусарова ольга михайловна">
+  <div class="vfc-card-org">СМОЛЕНСКИЙ ФИЛИАЛ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕННОГО ОБРАЗОВАТЕЛЬНОГО БЮДЖЕТНОГО УЧРЕ...</div>
+  <div class="vfc-card-theme">Буква «Ё» и ее борьба за существование</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Бакалавриат</span></div>
+  <div class="vfc-card-people">👥 Прижимов Дмитрий Андреевич; Игнатов Глеб Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Гусарова Ольга Михайловна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/7e5/jq1e802w9zmx749er1ietg6m1bix0r64/Dokument-Microsoft-Word-_6_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="сургутский финансово-экономический колледж при правительстве рф олимпийский парк 👥 журавлев даниил владимирович; шапошникова елизавета романовна 👨‍🏫 максутова эльза раисовна">
+  <div class="vfc-card-org">Сургутский финансово-экономический колледж при Правительстве РФ</div>
+  <div class="vfc-card-theme">Олимпийский парк</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">средне-специальное (СПО)</span></div>
+  <div class="vfc-card-people">👥 Журавлев Даниил Владимирович; Шапошникова Елизавета Романовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Максутова Эльза Раисовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/9df/mnvfgb63kxpydk618s8zgbzcrab8who7/Sotsialno_gumanitarnye-nauki_Olimpiyskiy-park.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="тульский филиал финансового университета при правительстве рф золотой бункер 👥 судаченкова елизавета александровна; большова алина андреевна, строгонова диана сергеевна 👨‍🏫 жуков роман александрович">
+  <div class="vfc-card-org">Тульский филиал Финансового университета при Правительстве РФ</div>
+  <div class="vfc-card-theme">Золотой бункер</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Незаконченное высшее образование</span></div>
+  <div class="vfc-card-people">👥 Судаченкова Елизавета Александровна; Большова Алина Андреевна, Строгонова Диана Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Роман Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/5f3/iux732n3q2i3q7vnyiayn728qheivt24/Sotsialno_gumanitarnye-nauki_Zolotoy-bunker.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="федеральное государственное образовательное бюджетное учреждение высшего образов... vr-симулятор финансовой грамотности: “первые шаги инвестора&quot;. 👥 осиюк дмитрий антонович; завъялова анастасия сергеевна 👨‍🏫 панфилова ольга владимировна">
+  <div class="vfc-card-org">Федеральное государственное образовательное бюджетное учреждение высшего образов...</div>
+  <div class="vfc-card-theme">VR-СИМУЛЯТОР ФИНАНСОВОЙ ГРАМОТНОСТИ: “ПЕРВЫЕ ШАГИ ИНВЕСТОРА".</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Осиюк Дмитрий Антонович; Завъялова Анастасия Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Панфилова Ольга Владимировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/cc6/vmj7o5hawkk5leqwreorsolj5e1n7cc8/Na-konkurs_-Osiyuk-Dmitriy-Antonovich_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="финансовый университет при правительстве российской федерации, г. пенза применение технологий виртуальной реальности в процессе подготовки будущих менеджеров 👥 серебряков андрей алексеевич; фошина мария алексеевна 👨‍🏫 бистерфельд ольга александровна">
+  <div class="vfc-card-org">Финансовый университет при правительстве Российской Федерации, г. Пенза</div>
+  <div class="vfc-card-theme">Применение технологий виртуальной реальности в процессе подготовки будущих менеджеров</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">высшее (1 - бакалавриат, 2 - магистратура)</span></div>
+  <div class="vfc-card-people">👥 Серебряков Андрей Алексеевич; Фошина Мария Алексеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Бистерфельд Ольга Александровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/803/387rxgomfnfcpzwochhl0u2ld9q4k5pm/Sotsialno_gumanitarnye-nauki_Primenenie-tekhnologiy-virtualnoy-realnosti-v-protsesse-podgotovki-budushchikh-menedzherov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _social" data-search="финансовый университет при правительстве российской федерации, сургутский финанс... влияния большинства на выбор человека (склонность человека к конформности) 👥 лутковский андрей андреевич; шпанагель вероника евгеньевна 👨‍🏫 максутова эльза раисовна">
+  <div class="vfc-card-org">Финансовый университет при Правительстве Российской Федерации, Сургутский финанс...</div>
+  <div class="vfc-card-theme">Влияния большинства на выбор человека (склонность человека к конформности)</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _social">Социально-гуманитарные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">основное общее образование</span></div>
+  <div class="vfc-card-people">👥 Лутковский Андрей Андреевич; Шпанагель Вероника Евгеньевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Максутова Эльза Раисовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/139/7vjq0aw60w12sexbky1k02tn1pg3o1hg/Sotsialno_gumanitarnye-nauki_test-vliyaniya-bolshinstva-na-mnenie-cheloveka.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+  </div>
+</section>
+
+<section class="vfc-section" id="exact">
+  <header class="vfc-section-header">
+    <span class="vfc-section-emoji">📊</span>
+    <h2 class="vfc-section-title">Точные науки</h2>
+    <span class="vfc-section-count">31 работ</span>
+  </header>
+  <div class="vfc-grid">
+<article class="vfc-card _exact" data-search="доцент живая геометрия: математика в орнаментах народов россии 👥 тоноян рафаель артурович; расторгуев михаил александрович , краткая дарья игоревна, адарченко аполлинария вадимовна 👨‍🏫 рзун ирина геннадьевна">
+  <div class="vfc-card-org">доцент</div>
+  <div class="vfc-card-theme">Живая геометрия: Математика в орнаментах народов России</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">аспирантура</span></div>
+  <div class="vfc-card-people">👥 Тоноян Рафаель Артурович; Расторгуев Михаил Александрович , Краткая Дарья Игоревна, Адарченко Аполлинария Вадимовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Рзун Ирина Геннадьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/5f3/42ac5tdckdfaxh2nx1b2ucykgd2m7bt6/1.-Tezisy-Proekta_Novorossiysk.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="калужский филиал финансового университета при правительстве рф в мире функций двух переменных 👥 игнахина екатерина владимировна; кузнецов иван романович, ильин андрей иванович 👨‍🏫 дробышева ирина васильевна">
+  <div class="vfc-card-org">Калужский филиал Финансового Университета при Правительстве РФ</div>
+  <div class="vfc-card-theme">В мире функций двух переменных</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Игнахина Екатерина Владимировна; Кузнецов Иван Романович, Ильин Андрей Иванович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Дробышева Ирина Васильевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/e0f/ii1mh3q3zukzb1d0nmwiu7rjjq0l854i/TEZISY.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="кипфин создание vr-урока по трём законам ньютона для учеников 7 класса 👥 воронова елизавета геннадьевна; джамбаева алия кямаловна, жданов григорий сергеевич, покусаева арина васильевна 👨‍🏫 нинкин кирилл юрьевич">
+  <div class="vfc-card-org">КИПФИН</div>
+  <div class="vfc-card-theme">Создание VR-урока по трём законам Ньютона для учеников 7 класса</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Воронова Елизавета Геннадьевна; Джамбаева Алия Кямаловна, Жданов Григорий Сергеевич, Покусаева Арина Васильевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Нинкин Кирилл Юрьевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/a41/u6tjkdlu4u4624df1ayfye31ytdkqos0/Tezisy-proektnoy-raboty.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="краснодарский филиал финансового университета при правительстве рф использование среды разработки varwin и его возможности 👥 согомонян роберт араратович; лукашова юлиана александровна, носачева дарья дмитриевна 👨‍🏫 молчан алексей сергеевич">
+  <div class="vfc-card-org">Краснодарский филиал Финансового университета при Правительстве РФ</div>
+  <div class="vfc-card-theme">Использование среды разработки Varwin и его возможности</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">бакалавриат</span></div>
+  <div class="vfc-card-people">👥 Согомонян Роберт Араратович; Лукашова Юлиана Александровна, Носачева Дарья Дмитриевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Молчан Алексей Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/461/40mw6g1a8zxfc9snzx0sc4sav7h1n3ru/Ispolzovanie-sredy-razrabotki-Varwin-i-ego-vozmozhnosti.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="курский филиал финуниверситета финбанк: vr-симулятор 👥 холодова полина андреевна; батура олеся николаевна 👨‍🏫 батура олеся николаевна">
+  <div class="vfc-card-org">Курский филиал Финуниверситета</div>
+  <div class="vfc-card-theme">ФИНБАНК: VR-СИМУЛЯТОР</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Холодова Полина Андреевна; Батура Олеся Николаевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Батура Олеся Николаевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/7ff/ua8yvtelnjzi2zt1fs6qp489b650arru/Tochnye-nauki-Finbank.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="курский филиал финуниверситета киберщит: финансовый суверенитет 👥 натаров владислав дмитриевич; прудникова мария вадимовна, долженкова евгения михайловна 👨‍🏫 батура олеся николаевна">
+  <div class="vfc-card-org">Курский филиал Финуниверситета</div>
+  <div class="vfc-card-theme">КИБЕРЩИТ: ФИНАНСОВЫЙ СУВЕРЕНИТЕТ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Натаров Владислав Дмитриевич; Прудникова Мария Вадимовна, Долженкова Евгения Михайловна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Батура Олеся Николаевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/cf8/hsraj6r2toxi2qippybjt6xt3ueoyumi/Tochnye-nauki-Kibershchit.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета квантовое шифрование 👥 богданов даниил васильевич 👨‍🏫 алиев самир алиевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Квантовое шифрование</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее общее</span></div>
+  <div class="vfc-card-people">👥 Богданов Даниил Васильевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Алиев Самир Алиевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/412/bl37y1xuzxzbq4unci0bzg7gnhbbx9xx/Kvantovaya-kriptografiya_Kvantovoe-shifrovanie.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета разработка внеурочной деятельности по математике на английском языке 👥 стельмах дарья дмитриевна 👨‍🏫 крылова елена юрьевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Разработка внеурочной деятельности по математике на английском языке</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее</span></div>
+  <div class="vfc-card-people">👥 Стельмах Дарья Дмитриевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Крылова Елена Юрьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/dc1/dee52k1tx14rgqqcjis8zyks4h32iwjw/tezis-ivr-FINAL-111_-Copy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета разработка маршрутных листов по темам «простейшие уравнения» и «преобразования и вычисления» 👥 якушева анастасия яковлевна; федорова елена антоновна 👨‍🏫 куликова ирина владимировна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Разработка маршрутных листов по темам «простейшие уравнения» и «преобразования и вычисления»</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Средний</span></div>
+  <div class="vfc-card-people">👥 Якушева Анастасия Яковлевна; Федорова Елена Антоновна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Куликова Ирина Владимировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/aaa/uhp9ixcqykktmitsj0xgnrz2g34zo48x/Tezisy_marshrutnye_listy_EGE.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета влияние визуализации на понимание задач на движение 👥 сергеева елизавета антоновна 👨‍🏫 новикова ольга васильевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Влияние визуализации на понимание задач на движение</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Сергеева Елизавета Антоновна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Новикова Ольга Васильевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/2c8/mn3opnk18matixs2z7z65ztl1iwp36gy/Matematika_vizualizatsiya.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета создание рабочих листов по теме решение алгебраических уравнений для подготовки к огэ 👥 бочарова вера васильевна; мигунова екатерина викторовна 👨‍🏫 новикова ольга васильевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">СОЗДАНИЕ РАБОЧИХ ЛИСТОВ ПО ТЕМЕ РЕШЕНИЕ АЛГЕБРАИЧЕСКИХ УРАВНЕНИЙ ДЛЯ ПОДГОТОВКИ К ОГЭ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Бочарова Вера Васильевна; Мигунова Екатерина Викторовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Новикова Ольга Васильевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/6c9/mr6hc125x35teofhfqo0u0tkzn0q0tr3/Tochnye-nauki_Sozdanie-rabochikh-listov.doc-_1_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета разработка сборника задач по теме &quot;графики функций&quot; 👥 ермолова вероника алексеевна 👨‍🏫 куликова ирина владимировна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Разработка сборника задач по теме "Графики функций"</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Ермолова Вероника Алексеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Куликова Ирина Владимировна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/6a2/sd1racpgaud4mrn1nghpmxntomfufrx5/Tochnye_nauki_Razrabotka_sbornika_zadach_po_teme_Grafiki_funktsiy..docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета выбор комплектующих для персонального компьютера под разные задачи 👥 сидоров даниил николаевич 👨‍🏫 алиев самир алиевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Выбор комплектующих для персонального компьютера под разные задачи</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее общее</span></div>
+  <div class="vfc-card-people">👥 Сидоров Даниил Николаевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Алиев Самир Алиевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/8b2/8s07dg0rixun47yf26rnfezys14km2w8/Tochnye-nauki_Vybor-komplektuyushchikh-dlya-pk-pod-raznye-zadachi.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета создание и проведение интеллектуальной игры по математике «что? где? когда?» для 9 классов 👥 бородин ярослав сергеевич 👨‍🏫 ненаглядова ксения николаевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание и проведение интеллектуальной игры по математике «Что? Где? Когда?» для 9 классов</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Бородин Ярослав Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ненаглядова Ксения Николаевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/8ec/bz6cyzv0tvt40yf61rkuhwy20fkyqvzi/Tochnye_nauki_Intellektualnaya_igra_CHtoGdeKogda_po_matematike_dlya_9_klassov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета математическое обоснование феномена шести рукопожатий 👥 мордасовва софья дмитриевна; - 👨‍🏫 ненаглядова ксения николаевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Математическое обоснование феномена шести рукопожатий</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее Общее Образование</span></div>
+  <div class="vfc-card-people">👥 Мордасовва Софья Дмитриевна; -</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Ненаглядова Ксения Николаевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/e15/pc29xaosh4jm9it3dcmf5a2vwnyvrb3h/TEZISY.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета разработка рабочей тетради при подготовке к егэ по профильной математике. задание 4 👥 захарова алёна никитична; орлова милана вячеславовна 👨‍🏫 крылова екатерина юрьевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">РАЗРАБОТКА РАБОЧЕЙ ТЕТРАДИ ПРИ ПОДГОТОВКЕ К ЕГЭ ПО ПРОФИЛЬНОЙ МАТЕМАТИКЕ. ЗАДАНИЕ 4</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Захарова Алёна Никитична; Орлова Милана Вячеславовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Крылова Екатерина Юрьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/428/1kwh7wfbgwga7rc5u700l6z2w8iaj30q/shablontezisov.pdf" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета разработка рабочей тетради при подготовке к егэ по профильной математике. задание 4 👥 орлова милана вячеславовна; захарова алёна никитична 👨‍🏫 крылова екатерина юрьевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">РАЗРАБОТКА РАБОЧЕЙ ТЕТРАДИ ПРИ ПОДГОТОВКЕ К ЕГЭ ПО ПРОФИЛЬНОЙ МАТЕМАТИКЕ. ЗАДАНИЕ 4</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Орлова Милана Вячеславовна; Захарова Алёна Никитична</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Крылова Екатерина Юрьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/5bf/cxnm4l72nf2wseczwzq6yxbhq2mjsk4g/shablontezisov.pdf" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="лицей финуниверситета создание инструмента для разработки графовых редакторов на основе игрового движка unity 👥 чернышов артём дмитриевич 👨‍🏫 алиев самир алиевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание инструмента для разработки графовых редакторов на основе игрового движка Unity</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее</span></div>
+  <div class="vfc-card-people">👥 Чернышов Артём Дмитриевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Алиев Самир Алиевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/ada/e52tqmvupfkwndz52soiltsk50id6meb/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="московский финансовый колледж разработка и исследование эффективности vr-симулятора бухгалтерского рабочего места для визуализации финансовой отчётности 👥 подосенов илья максимович; введенский михаил николаевич 👨‍🏫 жуков михаил михайлович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">РАЗРАБОТКА И ИССЛЕДОВАНИЕ ЭФФЕКТИВНОСТИ VR-СИМУЛЯТОРА БУХГАЛТЕРСКОГО РАБОЧЕГО МЕСТА ДЛЯ ВИЗУАЛИЗАЦИИ ФИНАНСОВОЙ ОТЧЁТНОСТИ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">СПО, 2 курс</span></div>
+  <div class="vfc-card-people">👥 Подосенов Илья Максимович; Введенский Михаил Николаевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Михаил Михайлович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/a1d/83l6vypbfflqp3wege1w9vtfvm67yyl9/RAZRABOTKA-I-ISSLEDOVANIE-EFFEKTIVNOSTI-VR.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="московский финансовый колледж финансовый детектив: разоблачи мошенника 👥 анкудинова анна андреевна; кирэу алиса васильевна, воронина екатерина романовна 👨‍🏫 матиев арслан шахсултанович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">Финансовый детектив: разоблачи мошенника</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Анкудинова Анна Андреевна; Кирэу Алиса Васильевна, Воронина Екатерина Романовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Матиев Арслан Шахсултанович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/4f3/qyoe8oquftujmvwhz0uxxa54g1u56lmj/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="московский финансовый колледж vr-платформа для сравнительного анализа инвестиционной привлекательности компаний 👥 филатова полина максимовна; шовикова виктория александровна 👨‍🏫 жуков михаил михайлович">
+  <div class="vfc-card-org">Московский Финансовый колледж</div>
+  <div class="vfc-card-theme">VR-ПЛАТФОРМА ДЛЯ СРАВНИТЕЛЬНОГО АНАЛИЗА ИНВЕСТИЦИОННОЙ ПРИВЛЕКАТЕЛЬНОСТИ КОМПАНИЙ</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Филатова Полина Максимовна; Шовикова Виктория Александровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Михаил Михайлович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/264/8bhoyv7xqjsbpufxem0p2ofdmt12wpf8/Tochnye_nauki_VR_platforma_dlya_sravnitelnogo_analiza_investitsionnoy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="самарский филиал финуниверситета спасение планеты с помощью счета 👥 андреев артемий максимович 👨‍🏫 яковлева ксения сергеевна">
+  <div class="vfc-card-org">Самарский филиал Финуниверситета</div>
+  <div class="vfc-card-theme">Спасение планеты с помощью счета</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Андреев Артемий Максимович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Яковлева Ксения Сергеевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/400/3ntxni5egtejk2q2gb60jk4xy1b796z0/Tezisy-Andreev.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="самарский филиал финуниверситета игра баскетбол на улице 👥 галимов артём разифович 👨‍🏫 яковлева ксения сергеевна">
+  <div class="vfc-card-org">Самарский филиал Финуниверситета</div>
+  <div class="vfc-card-theme">Игра баскетбол на улице</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Галимов Артём Разифович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Яковлева Ксения Сергеевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/b3d/udlvn2koa6if1zzc2vfymez640uvsrya/Galimov-tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="санкт-петербургский филиал финансового университета при правительстве российской... визуализация солнечной системы и стремление людей в космос 👥 подлужная екатерина юрьевна; алексеёнок андрей дмитриевич 👨‍🏫 лехмус михаил юрьевич">
+  <div class="vfc-card-org">Санкт-Петербургский филиал Финансового университета при Правительстве Российской...</div>
+  <div class="vfc-card-theme">Визуализация солнечной системы и стремление людей в космос</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Бакалавриат</span></div>
+  <div class="vfc-card-people">👥 Подлужная Екатерина Юрьевна; Алексеёнок Андрей Дмитриевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Лехмус Михаил Юрьевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/abd/58ery67culls80976a30epkmh15yqm9n/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="тульский филиал финансового университета при правительстве рф анализ данных 👥 лабузова варвара александровна; вирченко виктория альбертовна , фокина елизавета романовна 👨‍🏫 жуков роман александрович">
+  <div class="vfc-card-org">Тульский филиал Финансового университета при Правительстве РФ</div>
+  <div class="vfc-card-theme">Анализ Данных</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Студент</span></div>
+  <div class="vfc-card-people">👥 Лабузова Варвара Александровна; Вирченко Виктория Альбертовна , Фокина Елизавета Романовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Роман Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/d04/f1kqwvu5b6iwoay4yyflfq7yozak3ydq/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="тульский филиал финансового университета при правительстве рф «лови предел, чувствуй производную: vr-урок математики» 👥 царькова анна алексеевна; чернова ангелина алексеевна 👨‍🏫 жуков роман александрович">
+  <div class="vfc-card-org">Тульский филиал Финансового университета при Правительстве РФ</div>
+  <div class="vfc-card-theme">«Лови предел, чувствуй производную: VR-урок математики»</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Незаконченное высшее образование</span></div>
+  <div class="vfc-card-people">👥 Царькова Анна Алексеевна; Чернова Ангелина Алексеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Жуков Роман Александрович</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/b47/pvyxvo4iwzk4u323czoz8ixrfqijyfso/varwin.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="уральский филиал финуниверситета vr симулятор сборки пк 👥 ладонкин александр михайлович; ильченко дмитрий андреевич, петрова арина евгеньевна 👨‍🏫 туманов михаил сергеевич">
+  <div class="vfc-card-org">Уральский филиал Финуниверситета</div>
+  <div class="vfc-card-theme">VR Симулятор сборки ПК</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Высшее</span></div>
+  <div class="vfc-card-people">👥 Ладонкин Александр Михайлович; Ильченко Дмитрий Андреевич, Петрова Арина Евгеньевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Туманов Михаил Сергеевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/39a/fgw5xbtammhyxw2vh8x52k4jumdu1bg1/TEZISY-K-PROEKTU.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="уфимский филиан финансового университета разработка обучающей vr-игры «сборка компьютера» в varwin 👥 гимашева юлия юриковна; галеев ильназ нарисович, логинов глеб сергеевич 👨‍🏫 хуторянский ян аркадьевич">
+  <div class="vfc-card-org">Уфимский филиан Финансового университета</div>
+  <div class="vfc-card-theme">Разработка обучающей VR-игры «Сборка компьютера» в Varwin</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">СПО</span></div>
+  <div class="vfc-card-people">👥 Гимашева Юлия Юриковна; Галеев Ильназ Нарисович, Логинов Глеб Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Хуторянский Ян Аркадьевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/3da/h5q8sbw1xki6osnz2j6jve6y53lj8o52/VarWin.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="финансовый университет при правительстве российской федерации, липецкий филиал визуализация архитектуры компьютера: путешествие внутрь процессора для изучения работы тактовых регистров 👥 уманец михаил алексеевич; коровин никита артёмович 👨‍🏫 мошкова анастасия викторовна">
+  <div class="vfc-card-org">Финансовый университет при Правительстве Российской Федерации, Липецкий филиал</div>
+  <div class="vfc-card-theme">Визуализация архитектуры компьютера: путешествие внутрь процессора для изучения работы тактовых регистров</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее профессиональное образование</span></div>
+  <div class="vfc-card-people">👥 Уманец Михаил Алексеевич; Коровин Никита Артёмович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Мошкова Анастасия Викторовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/672/8zxtuj24qos02hw3zijkdn531303r304/Tochnye_nauki_Vizualizatsiya_arkhitektury_kompyutera.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="финансовый университет при правительстве российской федерации, липецкий филиал сравнительный анализ эффективности традиционного и vr-обучения при изучении стереометрии и пространственного мышления 👥 полехина елизавета сергеевна 👨‍🏫 мошкова анастасия викторовна">
+  <div class="vfc-card-org">Финансовый университет при Правительстве Российской Федерации, Липецкий филиал</div>
+  <div class="vfc-card-theme">Сравнительный анализ эффективности традиционного и vr-обучения при изучении стереометрии и пространственного мышления</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее профессиональное образование</span></div>
+  <div class="vfc-card-people">👥 Полехина Елизавета Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Мошкова Анастасия Викторовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/704/szv8xmpd7zphza3az14rqrmhxjrxrgv4/Tochnye-nauki_Sravnitelnyy-analiz-effektivnosti-traditsionnogo-i-VR_obucheniya-pri-izuchenii-stereometrii-i-prostranstvennogo-myshleniya.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _exact" data-search="шадринский финансово-экономический колледж робоквест 👥 самылов тимофей евгеньевич; - 👨‍🏫 -">
+  <div class="vfc-card-org">Шадринский Финансово-Экономический Колледж</div>
+  <div class="vfc-card-theme">РобоКвест</div>
+  <div class="vfc-card-meta"><span class="vfc-badge">Точные науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Студент СПО</span></div>
+  <div class="vfc-card-people">👥 Самылов Тимофей Евгеньевич; -</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 -</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/abc/3q0vbqa976euto5758br243pc16h07mq/TochnyeNauki_RoboKvest.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+  </div>
+</section>
+
+<section class="vfc-section" id="philology">
+  <header class="vfc-section-header">
+    <span class="vfc-section-emoji">📚</span>
+    <h2 class="vfc-section-title">Филологические науки</h2>
+    <span class="vfc-section-count">17 работ</span>
+  </header>
+  <div class="vfc-grid">
+<article class="vfc-card _philology" data-search="лицей финуниверситета семантическая эволюция слов французского происхождения в английском языке 👥 орлов никита 👨‍🏫 перелетова екатерина михайловна, привалова любовь михайловна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Семантическая эволюция слов французского происхождения в английском языке</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Орлов Никита</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Перелетова Екатерина Михайловна, Привалова Любовь Михайловна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/fdf/lgs7yg0mnujj2gy22cowp4q2m66uf9bw/FilNauki_SemanticheskayaEvolyutsiya.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета два прочтения романа &quot;мастер и маргарита&quot;: сравнительный анализ юрия кары и владимира бортко в соответствии с культурно-историческим аспектомнализнализ экранизаций юрия кары и 👥 скрипцова марта александровна 👨‍🏫 павлов дмитрий игоревич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Два прочтения романа "Мастер и Маргарита": Сравнительный анализ Юрия Кары и Владимира Бортко в соответствии с культурно-историческим аспектомнализнализ экранизаций Юрия Кары и</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Скрипцова Марта Александровна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Павлов Дмитрий Игоревич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/77f/jvcnhf4zju5ksvdr1c4cj0d74jk8rx0p/Filologicheskoe_SravnitelnyyAnalizEkranizatsiyMasterIMargarita.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета особенности перевода каламбуров в &quot;алиса в стране чудес&quot; л. кэрролла 👥 мостовая анна денисовна 👨‍🏫 иванова елена аркадьевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Особенности перевода каламбуров в "Алиса в стране чудес" Л. Кэрролла</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Мостовая Анна Денисовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Иванова Елена Аркадьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/b5f/l8mbme28jv1heqmeaz76a8sth0uwg0e5/Filologicheskie-nauki_Osobennosti-perevoda-kalamburov-v-Alisa-v-strane-chudes-L.-Ke.doc.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета языковая тревожность у подростков 👥 горбунова кира ивановна 👨‍🏫 мезенцева мария александровна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Языковая тревожность у подростков</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Горбунова Кира Ивановна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Мезенцева Мария Александровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/1dc/1t1p375isu358v3upwkmm6ffgyulc7f0/_Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета различные стратегии изучения английского языка для подростков 👥 подгорнова варвара алексеевна 👨‍🏫 фомичева кристина михайловна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Различные стратегии изучения английского языка для подростков</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">10 класс</span></div>
+  <div class="vfc-card-people">👥 Подгорнова Варвара Алексеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Фомичева Кристина Михайловна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/321/3f1gwolp5k46yob4g2r012env3le8com/Filologieskie-nauki_Razlichnye-strategii-izucheniya-angliyskogo-yazyka-dlya-podrostkov.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета литературная кухня: как обеденный стол в русских и иностранных романах раскрывает пропасть между культурами 👥 семёнов егор артурович 👨‍🏫 капустина галина леонидовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Литературная кухня: как обеденный стол в русских и иностранных романах раскрывает пропасть между культурами</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Семёнов Егор Артурович</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Капустина Галина Леонидовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/8cf/5vk7u9splywlrxyrvwtk219gdzfkyetm/Filologiya_Literaturnaya-kukhnya-kak-obedennyy-stol-v-russkikh-i-inostrannykh-romanakh-raskryvaet-propast-mezhdu-kulturami.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета поэтика рассказа ф. м. достоевского «мальчик у христа на ёлке&quot; 👥 кутуков андрей сергеевич; зайончковская алиса евгеньевна , малаховская ирина игнатьевна 👨‍🏫 демушов кирилл геннадьевич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Поэтика рассказа Ф. М. Достоевского «Мальчик у Христа на ёлке"</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Кутуков Андрей Сергеевич; Зайончковская Алиса Евгеньевна , Малаховская Ирина Игнатьевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Демушов Кирилл Геннадьевич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/67e/h8u09akwbyml3ccrocaksn4wimrafq1h/Filologicheskoe-napravlenie._Poetika-rasskaza-F.-M.-Dostoevskogo-_Malchik-u-KHrista-na-yelke_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета орфография на отлично: настольная игра для подготовки к егэ по русскому языку 👥 белов александр вадимович; кучинская софья денисовна 👨‍🏫 шкляр мария романовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Орфография на отлично: настольная игра для подготовки к ЕГЭ по русскому языку</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Белов Александр Вадимович; Кучинская Софья Денисовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Шкляр Мария Романовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/537/v1nzxl0t7h7l3ui1nuxgeqq0tg5h7e90/Filologicheskie_nauki_Orfografiya_na_otlichno_Nastolnaya_igra_dlya_podgotovki_k_EGE_po_russkomu_yazyku.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета образ хлестакова в литературе и медиа: создание интерактивного лендинга 👥 гафиулина кира арвидасовна 👨‍🏫 шкляр мария романовна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Образ Хлестакова в литературе и медиа: создание интерактивного лендинга</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Гафиулина Кира Арвидасовна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Шкляр Мария Романовна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/4a1/61u71cvn94ngnkv0lt3ds5a8anib5su6/Filologicheskie_nauki_Obraz_KHlestakova_v_literature_i_media_sozdanie_interaktivnogo_lendinga.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета адаптивность слуха к акцентам английского языка (китайский, индийский) как фактор успеха в деловой коммуникации 👥 арутюнян леон араевич 👨‍🏫 мезенцева мария александровна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Адаптивность слуха к акцентам английского языка (китайский, индийский) как фактор успеха в деловой коммуникации</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее общее, 10 класс</span></div>
+  <div class="vfc-card-people">👥 Арутюнян Леон Араевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Мезенцева Мария Александровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/ff0/p0q0l2hxqffyr4jjr5ojgqwjxfw6f3re/Lingvistika_Adaptivnost-slukha-k-aktsentam-angliyskogo-yazyka-_kitayskiy_-indiyskiy_-kak-faktor-uspekha-delovoy-kommunikatsii.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета создание маршрутных листов по литературе на примере поэмы «кому на руси жить хорошо?» н. а. некрасова 👥 контеева маргарита сергеевна 👨‍🏫 павлов дмитрий игоревич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Создание маршрутных листов по литературе на примере поэмы «Кому на Руси жить хорошо?» Н. А. Некрасова</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Контеева Маргарита Сергеевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Павлов Дмитрий Игоревич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/948/dy1iododjzfdc0zo99w7u5xwwyhws755/Filologicheskie-nauki_Sozdanie-marshrutnykh-listov-po-literature-na-primere-poemy-Komu-na-Rusi-zhit-khorosho-N.-A.-Nekrasova.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета проблема перевода экономической лексики в художественном тексте на примере романа а.хейли «менялы» 👥 буленков дмитрий сергеевич 👨‍🏫 иванова елена аркадьевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">ПРОБЛЕМА ПЕРЕВОДА ЭКОНОМИЧЕСКОЙ ЛЕКСИКИ В ХУДОЖЕСТВЕННОМ ТЕКСТЕ НА ПРИМЕРЕ РОМАНА А.ХЕЙЛИ «МЕНЯЛЫ»</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _research">Исследовательская работа</span>
+<span class="vfc-badge">среднее</span></div>
+  <div class="vfc-card-people">👥 Буленков Дмитрий Сергеевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Иванова Елена Аркадьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/24e/5x9k9gtzq2zycc0clwvgygk7zghfw5dm/Filologicheskie-nauki_PROBLEMA-PEREVODA-EKONOMICHESKOY-LEKSIKI-V-KHUDOZHESTVENNOM-TEKST-NA-_1_.doc" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета рабочая тетрадь для подготовки к заданию 4 устной части егэ по английскому языку 👥 латонова мария николаевна 👨‍🏫 иванова елена аркадьевна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Рабочая тетрадь для подготовки к заданию 4 устной части ЕГЭ по английскому языку</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее образование</span></div>
+  <div class="vfc-card-people">👥 Латонова Мария Николаевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Иванова Елена Аркадьевна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/d90/v44hsz97gph7q4p80gijtnk5ml20x5qe/Proekt_Rabochaya-tetrad-dlya-podgotovki-k-zadaniyu-4-ustnoy-chasti-EGE-po-angliyskomu-yazyku.doc.pdf" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета англицизмы в развитии русского языка 👥 савина анна александровна; школьник герман гргорьевич 👨‍🏫 фомичева кристина михайловна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Англицизмы в развитии русского языка</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">10</span></div>
+  <div class="vfc-card-people">👥 Савина Анна Александровна; школьник Герман Гргорьевич</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Фомичева Кристина Михайловна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/c6e/dzh7lz8nekx70ih1603z8x2orlglo3j8/TEZISY-PROEKTNOY-RABOTY-_1_.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета создание интеллект-карты по «герою нашего времени» м. ю. лермонтова 👥 пшеничникова анастасия игоревна 👨‍🏫 павлов дмитрий игоревич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">СОЗДАНИЕ ИНТЕЛЛЕКТ-КАРТЫ ПО «ГЕРОЮ НАШЕГО ВРЕМЕНИ» М. Ю. ЛЕРМОНТОВА</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Средний общий</span></div>
+  <div class="vfc-card-people">👥 Пшеничникова Анастасия Игоревна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Павлов Дмитрий Игоревич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/4c2/cji0rmnwft3nj5p21mj2b4nosuu37pv0/Filologicheskie-nauki_Pshenichnikova.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета серия уроков английского языка в формате speaking club 👥 ролдугина яна андреевна 👨‍🏫 мезенцева мария александровна">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Серия уроков английского языка в формате Speaking club</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее , 10 класс</span></div>
+  <div class="vfc-card-people">👥 Ролдугина Яна Андреевна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Мезенцева Мария Александровна</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/07b/ol5qztotq1lr8m39jj2mv16rprmqeznb/Tezisy.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+<article class="vfc-card _philology" data-search="лицей финуниверситета разработка 22 задания егэ по русскому языку 👥 артеменко вера антоновна 👨‍🏫 павлов дмитрий игоревич">
+  <div class="vfc-card-org">Лицей Финуниверситета</div>
+  <div class="vfc-card-theme">Разработка 22 задания ЕГЭ по русскому языку</div>
+  <div class="vfc-card-meta"><span class="vfc-badge _philology">Филологические науки</span>
+<span class="vfc-badge _project">Проектная работа</span>
+<span class="vfc-badge">Среднее общее</span></div>
+  <div class="vfc-card-people">👥 Артеменко Вера Антоновна</div>
+  <div class="vfc-card-people _mentor">👨‍🏫 Павлов Дмитрий Игоревич</div>
+  <div class="vfc-card-links"><a  href="https://crm.fa.ru/upload/crm/980/ctw43lh4lteteh416bosac5nwb1b0q4p/Filologicheskie-nauki_Artemenko.docx" target="_blank">📄 Тезисы</a></div>
+</article>
+  </div>
+</section>
+
+  <footer>
+    <p>Конкурс «ВарФин 2026» · Финансовый университет при Правительстве РФ</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var search = document.getElementById('vfcSearch');
+  var info = document.getElementById('vfcInfo');
+  var filters = document.querySelectorAll('.vfc-filter');
+  var sections = document.querySelectorAll('.vfc-section');
+  var emptyMsg = document.getElementById('vfcEmpty');
+  var currentFilter = 'all';
+
+  // Сохраним оригинальные счётчики ДО любых изменений
+  document.querySelectorAll('.vfc-section-count').forEach(function(el){
+    el.dataset.original = el.textContent;
+  });
+
+  function applyFilters(){
+    var q = (search.value || '').trim().toLowerCase();
+    var visibleTotal = 0;
+
+    sections.forEach(function(sec){
+      var sid = sec.id;
+      var sectionVisible = (currentFilter === 'all' || currentFilter === sid);
+      var sectionCount = 0;
+      var localCards = sec.querySelectorAll('.vfc-card');
+      localCards.forEach(function(c){
+        var matchText = (q === '' || c.dataset.search.indexOf(q) !== -1);
+        var visible = sectionVisible && matchText;
+        c.classList.toggle('_hidden', !visible);
+        if (visible) sectionCount++;
+      });
+      sec.classList.toggle('_hidden', !sectionVisible || sectionCount === 0);
+
+      var countEl = sec.querySelector('.vfc-section-count');
+      if (countEl) {
+        var origCount = countEl.dataset.original;
+        countEl.textContent = (q === '' && currentFilter === 'all') ? origCount : (sectionCount + ' / ' + origCount);
+      }
+      visibleTotal += sectionCount;
+    });
+
+    info.textContent = (q === '' && currentFilter === 'all')
+      ? ''
+      : 'Найдено работ: ' + visibleTotal;
+    emptyMsg.classList.toggle('_show', visibleTotal === 0);
+  }
+
+  search.addEventListener('input', applyFilters);
+  filters.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filters.forEach(function(b){ b.classList.remove('_active'); });
+      btn.classList.add('_active');
+      currentFilter = btn.dataset.filter;
+      applyFilters();
+      // Скролл к первой видимой секции
+      if (currentFilter !== 'all') {
+        var target = document.getElementById(currentFilter);
+        if (target && !target.classList.contains('_hidden')) {
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
